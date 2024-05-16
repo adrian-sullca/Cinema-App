@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1119.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.RootLayoutClienteController">
+   <left>
+      <VBox prefHeight="671.0" prefWidth="260.0" styleClass="background1" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <ImageView fitHeight="222.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/logoCinema.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="11.0" top="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="307.0" text="Perfil" translateY="15.0">
+               <styleClass>
+                  <String fx:value="buttonOscuro" />
+                  <String fx:value="txtButtonOscuro" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleCatalogoButton" prefHeight="75.0" prefWidth="307.0" text="Catalogo" translateY="15.0">
+               <styleClass>
+                  <String fx:value="txtButtonOscuro" />
+                  <String fx:value="buttonOscuro" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="307.0" text="Carrito" translateY="15.0">
+               <styleClass>
+                  <String fx:value="buttonOscuro" />
+                  <String fx:value="txtButtonOscuro" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="307.0" text="Historial" translateY="15.0">
+               <styleClass>
+                  <String fx:value="txtButtonOscuro" />
+                  <String fx:value="buttonOscuro" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="307.0" text="Lista de Peliculas" translateY="15.0">
+               <styleClass>
+                  <String fx:value="buttonOscuro" />
+                  <String fx:value="txtButtonOscuro" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="buttonAzul" text="Cerrar Sesion" textFill="WHITE" translateX="55.0" translateY="40.0" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
