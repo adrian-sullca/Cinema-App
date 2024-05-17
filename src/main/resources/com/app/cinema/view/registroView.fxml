@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.RegistroViewController">
    <children>
       <BorderPane prefHeight="600.0" prefWidth="900.0">
          <left>
@@ -56,8 +56,8 @@
                   </GridPane>
                   <HBox layoutX="45.0" layoutY="504.0" spacing="160.0" AnchorPane.bottomAnchor="60.0">
                      <children>
-                        <Button layoutX="161.0" layoutY="517.0" mnemonicParsing="false" text="Registrarse" />
-                        <Button layoutX="243.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleIniciarSesionButtonAction" text="Iniciar Sesion" />
+                        <Button fx:id="registrarseBoton" layoutX="161.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionRegistrarseBoton" text="Registrarse" />
+                        <Button fx:id="iniciarSesionBoton" layoutX="243.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionIniciarSesionBoton" text="Iniciar Sesion" />
                      </children>
                   </HBox>
                   <Label layoutX="44.0" layoutY="80.0" prefHeight="37.0" prefWidth="161.0" styleClass="txt2" text="REGISTRATE" AnchorPane.bottomAnchor="483.0" AnchorPane.topAnchor="80.0">

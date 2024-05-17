@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.IniciarSesionViewController">
    <children>
       <BorderPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0">
          <left>
@@ -41,8 +41,8 @@
                   </GridPane>
                   <HBox layoutX="45.0" layoutY="380.0" spacing="160.0" AnchorPane.bottomAnchor="189.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="380.0">
                      <children>
-                        <Button layoutX="161.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleIniciarSesionButton" text="Iniciar Sesion" />
-                        <Button layoutX="243.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleRegistroButton" text="Registrarse" />
+                        <Button fx:id="iniciarSesionBoton" layoutX="161.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionIniciarSesionBoton" text="Iniciar Sesion" />
+                        <Button fx:id="registrarseBoton" layoutX="243.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionRegistrarseBoton" text="Registrarse" />
                      </children>
                   </HBox>
                   <Label layoutX="44.0" layoutY="193.0" prefHeight="37.0" prefWidth="205.0" styleClass="txt2" text="INICIAR SESION" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="193.0">

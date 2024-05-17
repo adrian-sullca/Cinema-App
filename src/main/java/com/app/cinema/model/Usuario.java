@@ -2,6 +2,9 @@ package com.app.cinema.model;
 
 import java.util.Date;
 
+import com.app.cinema.enums.Rol;
+import com.app.cinema.enums.TipoUsuario;
+
 public class Usuario {
 
     protected int idUsuario;
@@ -16,14 +19,17 @@ public class Usuario {
 
     protected String contraseña;
 
+    protected TipoUsuario tipoUsuario;
+
     public Usuario(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
-            String contraseña) {
+            String contraseña, TipoUsuario tipoUsuario) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
         this.correo = correo;
         this.contraseña = contraseña;
+        this.tipoUsuario = tipoUsuario;
     }
     
     public Usuario(String correo, String contraseña) {
@@ -79,10 +85,19 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void seTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
     @Override
     public String toString() {
         return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido
-                + ", fechaNacimiento=" + fechaNacimiento + ", correo=" + correo + ", contraseña=" + contraseña + "]";
+                + ", fechaNacimiento=" + fechaNacimiento + ", correo=" + correo + ", contraseña=" + contraseña
+                + ", tipoUsuario=" + tipoUsuario + "]";
     }
 
     public void registrarse() {

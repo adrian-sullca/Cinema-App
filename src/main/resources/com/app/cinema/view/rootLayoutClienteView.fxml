@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1119.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.RootLayoutClienteController">
+<BorderPane fx:id="rootLayoutClienteView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1119.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.RootLayoutClienteViewController">
    <left>
       <VBox prefHeight="671.0" prefWidth="260.0" styleClass="background1" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -21,13 +21,13 @@
                   <Insets left="11.0" top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="307.0" text="Perfil" translateY="15.0">
+            <Button fx:id="perfilBoton" mnemonicParsing="false" onAction="#accionPerfilBoton" prefHeight="75.0" prefWidth="307.0" text="Perfil" translateY="15.0">
                <styleClass>
                   <String fx:value="buttonOscuro" />
                   <String fx:value="txtButtonOscuro" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleCatalogoButton" prefHeight="75.0" prefWidth="307.0" text="Catalogo" translateY="15.0">
+            <Button fx:id="catalogoBoton" mnemonicParsing="false" onAction="#accionCatalogoBoton" prefHeight="75.0" prefWidth="307.0" text="Catalogo" translateY="15.0">
                <styleClass>
                   <String fx:value="txtButtonOscuro" />
                   <String fx:value="buttonOscuro" />

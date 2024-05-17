@@ -3,6 +3,7 @@ package com.app.cinema.model;
 import java.util.Date;
 
 import com.app.cinema.enums.Rol;
+import com.app.cinema.enums.TipoUsuario;
 
 public class Trabajador extends Usuario {
 
@@ -17,8 +18,19 @@ public class Trabajador extends Usuario {
     private DNI dNI;
 
     public Trabajador(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
-            String contraseña, int codiTrabajador, Date fechaAlta, double salario, Rol rol, DNI dNI) {
-        super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña);
+            String contraseña, TipoUsuario tipoUsuario, int codiTrabajador, Date fechaAlta, double salario, Rol rol,
+            DNI dNI) {
+        super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña, tipoUsuario);
+        this.codiTrabajador = codiTrabajador;
+        this.fechaAlta = fechaAlta;
+        this.salario = salario;
+        this.rol = rol;
+        this.dNI = dNI;
+    }
+
+    public Trabajador(String correo, String contraseña, int codiTrabajador, Date fechaAlta, double salario, Rol rol,
+            DNI dNI) {
+        super(correo, contraseña);
         this.codiTrabajador = codiTrabajador;
         this.fechaAlta = fechaAlta;
         this.salario = salario;
