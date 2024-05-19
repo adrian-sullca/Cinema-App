@@ -107,7 +107,6 @@ public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
     @Override
     public List<Cliente> selectAll() {
         ArrayList<Cliente> clientes = new ArrayList<>();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
         try {
             connect();
             PreparedStatement ps = connection.prepareStatement(SELECTALL);
@@ -128,18 +127,7 @@ public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
 
                 if (usuario != null) {
                     Cliente cliente = new Cliente(
-                        usuario.getIdUsuario(),
-                        usuario.getNombre(), //
-                        usuario.getApellido(), //
-                        usuario.getFechaNacimiento(), //
-                        usuario.getCorreo(), //
-                        usuario.getContraseña(), // 
-                        usuario.getTipoUsuario(),
-                        codi_cliente,
-                        foto_perfil_cliente, //
-                        telefono, //
-                        comentario_pref,
-                        tarjetaCliente 
+                        usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getFechaNacimiento(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipoUsuario(), codi_cliente, foto_perfil_cliente, telefono, comentario_pref, tarjetaCliente 
                     );
                     clientes.add(cliente);
                 }

@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import com.app.cinema.App;
 import com.app.cinema.util.GestionarVistaUtils;
 
 public class RootLayoutClienteViewController {
@@ -15,6 +18,8 @@ public class RootLayoutClienteViewController {
     private Button perfilBoton;
     @FXML
     private Button catalogoBoton;
+    @FXML
+    private Button cerrarSesionBoton;
 
     public void mostrarRootLayoutCliente() {
         GestionarVistaUtils.cargarVista("view/perfilClienteView.fxml", rootLayoutClienteView);
@@ -28,5 +33,12 @@ public class RootLayoutClienteViewController {
     @FXML
     private void accionCatalogoBoton(ActionEvent event) {
         GestionarVistaUtils.cargarVista("view/catalogoView.fxml", rootLayoutClienteView);
+    }
+
+    @FXML
+    private void accionCerrarSesionBoton(ActionEvent event) {
+        Stage actualStage = (Stage) cerrarSesionBoton.getScene().getWindow();
+        actualStage.hide();
+        App.abrirInicioSesionView();
     }
 }

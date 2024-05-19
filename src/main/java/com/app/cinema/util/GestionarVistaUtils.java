@@ -18,4 +18,13 @@ public class GestionarVistaUtils {
             ex.printStackTrace();
         }
     }
+
+    public static void cargarVistaSinRootLayout(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(fxmlPath));
+            Parent view = loader.load();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
