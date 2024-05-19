@@ -7,19 +7,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.GestionDePeliculasViewController">
    <children>
       <AnchorPane layoutY="100.0" prefHeight="605.0" prefWidth="859.0" styleClass="background2">
          <children>
-            <TableView layoutX="50.0" layoutY="25.0" prefHeight="260.0" prefWidth="759.0">
+            <TableView fx:id="tableViewPeliculas" layoutX="50.0" layoutY="25.0" onMouseClicked="#seleccionarPeliculaTabla" prefHeight="260.0" prefWidth="759.0">
               <columns>
-                  <TableColumn prefWidth="66.0" text="Codigo" />
-                <TableColumn prefWidth="111.0" text="Nombre" />
-                <TableColumn prefWidth="112.0" text="Apellido" />
-                  <TableColumn prefWidth="104.0" text="Correo" />
-                  <TableColumn prefWidth="123.0" text="Telefono" />
-                  <TableColumn prefWidth="142.0" text="Nacimiento:" />
-                  <TableColumn minWidth="0.0" prefWidth="100.0" text="Tarjeta" />
+                  <TableColumn fx:id="tableColumnTitulo" prefWidth="185.0" text="Titulo" />
+                <TableColumn fx:id="tableColumnGenero" minWidth="0.0" prefWidth="106.0" text="Genero" />
+                <TableColumn fx:id="tableColumnDuracion" prefWidth="75.0" text="Duracion" />
+                  <TableColumn fx:id="tableColumnDescripcion" prefWidth="295.0" text="Descripcion" />
+                  <TableColumn fx:id="tableColumnFotoPortada" prefWidth="97.0" text="Foto Portada" />
               </columns>
             </TableView>
             <GridPane layoutX="50.0" layoutY="350.0" prefHeight="224.0" prefWidth="759.0">
@@ -37,26 +35,26 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" />
-                  <PasswordField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="fieldTituloTxt" prefHeight="40.0" GridPane.columnIndex="1" />
                   <Label text="Titulo" textFill="WHITE" />
                   <Label text="Genero:" textFill="WHITE" GridPane.rowIndex="1" />
                   <Label text="Duracion:" textFill="WHITE" GridPane.rowIndex="2" />
                   <Label text="Portada (ruta):" textFill="WHITE" GridPane.rowIndex="3" />
                   <Label text="Descripcion:" textFill="WHITE" GridPane.columnIndex="3" />
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="fieldDuracionTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cmbxGeneroPelicula" prefHeight="40.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="fieldPortadaTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <HBox layoutX="461.0" layoutY="300.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Editar">
+                  <Button fx:id="actualizarBoton" mnemonicParsing="false" onAction="#accionActualizarBoton" prefHeight="40.0" prefWidth="145.0" text="Actualizar">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Eliminar">
+                  <Button fx:id="eliminarBoton" mnemonicParsing="false" onAction="#accionEliminarBoton" prefHeight="40.0" prefWidth="145.0" text="Eliminar">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
@@ -66,7 +64,7 @@
             </HBox>
             <HBox layoutX="461.0" layoutY="330.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="50.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Añadir">
+                  <Button fx:id="añadirBoton" mnemonicParsing="false" onAction="#accionAñadirBoton" prefHeight="40.0" prefWidth="145.0" text="Añadir">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
@@ -88,6 +86,6 @@
          <children>
             <Label layoutX="61.0" layoutY="19.0" text="Gestion De Peliculas" />
          </children></AnchorPane>
-      <TextField layoutX="-8.0" layoutY="-1.0" prefHeight="110.0" prefWidth="348.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="50.0" />
+      <TextField fx:id="fieldDescripcionTxt" layoutX="-8.0" layoutY="-1.0" prefHeight="110.0" prefWidth="348.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="50.0" />
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package com.app.cinema.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.app.cinema.enums.Genero;
 
@@ -97,5 +98,15 @@ public class Pelicula {
                 + reseña + "]";
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Pelicula pelicula = (Pelicula) obj;
+        return Objects.equals(fotoPortada, pelicula.fotoPortada);
+    }
 }

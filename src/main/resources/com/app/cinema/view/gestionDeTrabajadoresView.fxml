@@ -65,7 +65,7 @@
                         <String fx:value="buttonAzul" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="actualizarBoton" mnemonicParsing="false" onAction="#accionActualizarBoton" prefHeight="40.0" prefWidth="145.0" text="Editar">
+                  <Button fx:id="actualizarBoton" mnemonicParsing="false" onAction="#accionActualizarBoton" prefHeight="40.0" prefWidth="145.0" text="Actualizar">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
