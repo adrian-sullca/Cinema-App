@@ -5,6 +5,7 @@ module com.app {
     requires java.sql;
     requires mysql.connector.java;
 
+    opens com.app.cinema.model to javafx.base;
     opens com.app.cinema.controller to javafx.fxml;
     opens com.app.cinema to javafx.fxml;
     exports com.app.cinema;

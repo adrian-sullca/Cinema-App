@@ -14,7 +14,7 @@ public class Transaccion {
     private Date fechaTransaccion;
 
     private TipoTransaccion tipoTransaccion;
-
+    
     private List<LineaTransaccion> lineaTransaccion = new ArrayList<LineaTransaccion> ();
 
     public Transaccion(int idTransaccion, Date fechaTransaccion, TipoTransaccion tipoTransaccion,

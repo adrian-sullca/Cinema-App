@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
-public class gestionarVista {
+public class GestionarVistaUtils {
     public static void cargarVista(String fxmlPath, BorderPane rootLayot) {
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(fxmlPath));

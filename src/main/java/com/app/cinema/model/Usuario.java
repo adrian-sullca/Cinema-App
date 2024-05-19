@@ -1,10 +1,9 @@
 package com.app.cinema.model;
 
 import java.util.Date;
-
-import com.app.cinema.enums.Rol;
 import com.app.cinema.enums.TipoUsuario;
 
+import java.util.Objects;
 public class Usuario {
 
     protected int idUsuario;
@@ -20,6 +19,10 @@ public class Usuario {
     protected String contraseña;
 
     protected TipoUsuario tipoUsuario;
+
+    
+    public Usuario() {
+    }
 
     public Usuario(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
             String contraseña, TipoUsuario tipoUsuario) {
@@ -105,4 +108,19 @@ public class Usuario {
     public void iniciarSesion() {
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Usuario usuario = (Usuario) obj;
+        return Objects.equals(correo, usuario.correo);
+    }
+    
+    
+    
 }

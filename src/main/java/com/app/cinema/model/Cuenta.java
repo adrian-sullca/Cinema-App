@@ -2,12 +2,11 @@ package com.app.cinema.model;
 
 import java.util.Date;
 
-
 public class Cuenta {
 
     private int idCuenta;
 
-    private int numeroCuenta;
+    private long numeroCuenta;
 
     private Date caducidad;
 
@@ -15,7 +14,10 @@ public class Cuenta {
 
     private double saldoDiponible;
 
-    public Cuenta(int idCuenta, int numeroCuenta, Date caducidad, int cVC, double saldoDiponible) {
+    public Cuenta() {
+    }
+
+    public Cuenta(int idCuenta, long numeroCuenta, Date caducidad, int cVC, double saldoDiponible) {
         this.idCuenta = idCuenta;
         this.numeroCuenta = numeroCuenta;
         this.caducidad = caducidad;
@@ -31,11 +33,11 @@ public class Cuenta {
         this.idCuenta = idCuenta;
     }
 
-    public int getNumeroCuenta() {
+    public long getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setNumeroCuenta(int numeroCuenta) {
+    public void setNumeroCuenta(long numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
 

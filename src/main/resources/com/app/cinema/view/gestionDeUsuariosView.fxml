@@ -7,19 +7,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.GestionDeClientesViewController">
    <children>
       <AnchorPane layoutY="100.0" prefHeight="605.0" prefWidth="859.0" styleClass="background2">
          <children>
-            <TableView layoutX="50.0" layoutY="25.0" prefHeight="260.0" prefWidth="759.0">
+            <TableView fx:id="tableViewClientes" layoutX="50.0" layoutY="25.0" onMouseClicked="#seleccionarClienteTabla" prefHeight="260.0" prefWidth="759.0">
               <columns>
-                  <TableColumn prefWidth="66.0" text="Codigo" />
-                <TableColumn prefWidth="111.0" text="Nombre" />
-                <TableColumn prefWidth="112.0" text="Apellido" />
-                  <TableColumn prefWidth="104.0" text="Correo" />
-                  <TableColumn prefWidth="123.0" text="Telefono" />
-                  <TableColumn prefWidth="142.0" text="Nacimiento:" />
-                  <TableColumn minWidth="0.0" prefWidth="100.0" text="Tarjeta" />
+                  <TableColumn fx:id="tableColumnNombre" prefWidth="88.0" text="Nombre" />
+                <TableColumn fx:id="tableColumnApellido" prefWidth="104.0" text="Apellido" />
+                <TableColumn fx:id="tableColumnCorreo" prefWidth="145.0" text="Correo" />
+                  <TableColumn fx:id="tableColumnContraseña" prefWidth="106.0" text="Contraseña" />
+                  <TableColumn fx:id="tableColumnFechaNacimiento" prefWidth="137.0" text="Fecha Nacimiento" />
+                  <TableColumn fx:id="tableColumnTelefono" prefWidth="103.0" text="Telefono" />
+                  <TableColumn fx:id="tableColumnTarjeta" minWidth="0.0" prefWidth="75.0" text="Tarjeta" />
               </columns>
             </TableView>
             <GridPane layoutX="50.0" layoutY="350.0" prefHeight="224.0" prefWidth="759.0">
@@ -37,29 +37,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" />
-                  <PasswordField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="fieldNombreTxt" prefHeight="40.0" GridPane.columnIndex="1" />
+                  <PasswordField fx:id="fieldContraseñaPsswrd" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Nombre:" textFill="WHITE" />
                   <Label text="Apellido:" textFill="WHITE" GridPane.rowIndex="1" />
                   <Label text="Correo:" textFill="WHITE" GridPane.rowIndex="2" />
                   <Label text="Contraseña:" textFill="WHITE" GridPane.rowIndex="3" />
                   <Label text="Nacimiento:" textFill="WHITE" GridPane.columnIndex="3" />
                   <Label text="Telefono:" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField prefHeight="40.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <DatePicker prefHeight="40.0" prefWidth="340.0" GridPane.columnIndex="4" />
+                  <TextField fx:id="fieldApellidoTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="fieldCorreoTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="fieldTelefonoTxt" prefHeight="40.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="datePickerFechaNacimiento" prefHeight="40.0" prefWidth="340.0" GridPane.columnIndex="4" />
                </children>
             </GridPane>
             <HBox layoutX="461.0" layoutY="300.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Editar">
+                  <Button fx:id="actualizarBoton" mnemonicParsing="false" onAction="#accionActualizarBoton" prefHeight="40.0" prefWidth="145.0" text="Actualizar">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Eliminar">
+                  <Button fx:id="eliminarBoton" mnemonicParsing="false" onAction="#accionEliminarBoton" prefHeight="40.0" prefWidth="145.0" text="Eliminar">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
@@ -69,13 +69,13 @@
             </HBox>
             <HBox layoutX="461.0" layoutY="330.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0" AnchorPane.bottomAnchor="39.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Cargar Foto">
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Vincular Tarjeta">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Añadir">
+                  <Button fx:id="añadirBoton" mnemonicParsing="false" onAction="#accionAñadirBoton" prefHeight="40.0" prefWidth="145.0" text="Añadir">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />

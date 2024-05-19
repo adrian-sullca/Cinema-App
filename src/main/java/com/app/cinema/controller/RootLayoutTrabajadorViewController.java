@@ -1,6 +1,6 @@
 package com.app.cinema.controller;
 
-import com.app.cinema.util.gestionarVista;
+import com.app.cinema.util.GestionarVistaUtils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,18 +16,39 @@ public class RootLayoutTrabajadorViewController {
     private Button gestionDeUsuariosBoton;
     @FXML
     private Button gestionDeTrabajadoresBoton;
+    @FXML
+    private Button gestionDePeliculasBoton;
+    @FXML
+    private Button gestionDeTransaccionesBoton;
+    @FXML
+    private Button gestionDeReseñasBoton;
 
     public void mostrarRootLayoutCliente() {
-        gestionarVista.cargarVista("view/gestionDeUsuariosView.fxml", rootLayoutTrabajadorView);
+        GestionarVistaUtils.cargarVista("view/gestionDeUsuariosView.fxml", rootLayoutTrabajadorView);
     }
 
     @FXML
     private void accionGestionDeUsuariosBoton(ActionEvent event) {
-        gestionarVista.cargarVista("view/gestionDeUsuariosView.fxml", rootLayoutTrabajadorView);
+        GestionarVistaUtils.cargarVista("view/gestionDeUsuariosView.fxml", rootLayoutTrabajadorView);
     }
 
     @FXML
     private void accionGestionDeTrabajadoresBoton(ActionEvent event) {
-        gestionarVista.cargarVista("view/gestionDeTrabajadoresView.fxml", rootLayoutTrabajadorView);
+        GestionarVistaUtils.cargarVista("view/gestionDeTrabajadoresView.fxml", rootLayoutTrabajadorView);
+    }
+
+    @FXML
+    private void accionGestionDePeliculasBoton(ActionEvent event) {
+        GestionarVistaUtils.cargarVista("view/gestionDePeliculasView.fxml", rootLayoutTrabajadorView);
+    }
+
+    @FXML
+    private void accionGestionDeTransaccionesBoton(ActionEvent event) {
+        GestionarVistaUtils.cargarVista("view/gestionDeTransaccionesView.fxml", rootLayoutTrabajadorView);
+    }
+
+    @FXML
+    private void accionGestionDeReseñasBoton(ActionEvent event) {
+        GestionarVistaUtils.cargarVista("view/gestionDeReseñasView.fxml", rootLayoutTrabajadorView);
     }
 }

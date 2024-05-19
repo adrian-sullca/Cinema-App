@@ -29,11 +29,9 @@ public class RegistroViewController {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-
             stage.showAndWait();
-
         } catch (IOException ex) {
-            ex.printStackTrace(); // Imprimir el stack trace para diagnosticar el problema
+            ex.printStackTrace();
         }
     }
 
@@ -54,7 +52,7 @@ public class RegistroViewController {
             stage.show();
 
         } catch (IOException ex) {
-            ex.printStackTrace(); // Imprimir el stack trace para diagnosticar el problema
+            ex.printStackTrace();
         }
     }
 }

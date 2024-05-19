@@ -2,7 +2,9 @@ package com.app.cinema.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.List;
+import java.util.Objects;
 
 import com.app.cinema.enums.TipoUsuario;
 
@@ -18,40 +20,22 @@ public class Cliente extends Usuario {
 
     private Carrito carrito;
 
-    private List<Cuenta> cuenta = new ArrayList<Cuenta> ();
+    private Cuenta tarjeta;
 
     private List<Transaccion> transaccion = new ArrayList<Transaccion> ();
 
     private ListaPeliculas listaPeliculas;
 
     public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
-            String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
-            String comentarioPref, Carrito carrito, List<Cuenta> cuenta, List<Transaccion> transaccion,
-            ListaPeliculas listaPeliculas) {
-        super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña, tipoUsuario);
-        this.codiCliente = codiCliente;
-        this.fotoPerfil = fotoPerfil;
-        this.telefono = telefono;
-        this.comentarioPref = comentarioPref;
-        this.carrito = carrito;
-        this.cuenta = cuenta;
-        this.transaccion = transaccion;
-        this.listaPeliculas = listaPeliculas;
-    }
-
-    public Cliente(String correo, String contraseña, int codiCliente, String fotoPerfil, int telefono,
-            String comentarioPref, Carrito carrito, List<Cuenta> cuenta, List<Transaccion> transaccion,
-            ListaPeliculas listaPeliculas) {
-        super(correo, contraseña);
-        this.codiCliente = codiCliente;
-        this.fotoPerfil = fotoPerfil;
-        this.telefono = telefono;
-        this.comentarioPref = comentarioPref;
-        this.carrito = carrito;
-        this.cuenta = cuenta;
-        this.transaccion = transaccion;
-        this.listaPeliculas = listaPeliculas;
-    }
+    String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
+    String comentarioPref, Cuenta tarjeta) {
+    super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña, tipoUsuario);
+    this.codiCliente = codiCliente;
+    this.fotoPerfil = fotoPerfil;
+    this.telefono = telefono;
+    this.comentarioPref = comentarioPref;
+    this.tarjeta = tarjeta;
+    }   
 
     public int getCodiCliente() {
         return codiCliente;
@@ -93,12 +77,12 @@ public class Cliente extends Usuario {
         this.carrito = carrito;
     }
 
-    public List<Cuenta> getCuenta() {
-        return cuenta;
+    public Cuenta getTarjeta() {
+        return tarjeta;
     }
 
-    public void setCuenta(List<Cuenta> cuenta) {
-        this.cuenta = cuenta;
+    public void setTarjeta(Cuenta tarjeta) {
+        this.tarjeta = tarjeta;
     }
 
     public List<Transaccion> getTransaccion() {
@@ -116,12 +100,28 @@ public class Cliente extends Usuario {
     public void setListaPeliculas(ListaPeliculas listaPeliculas) {
         this.listaPeliculas = listaPeliculas;
     }
+    //metodo para recuperar solo el numero de tarjeta del objeto Cuenta
+    public Long getNumeroCuenta() {
+        return tarjeta != null ? tarjeta.getNumeroCuenta() : null;
+    }
 
     @Override
     public String toString() {
-        return "Cliente [codiCliente=" + codiCliente + ", fotoPerfil=" + fotoPerfil + ", telefono=" + telefono
-                + ", comentarioPref=" + comentarioPref + ", carrito=" + carrito + ", cuenta=" + cuenta
-                + ", transaccion=" + transaccion + ", listaPeliculas=" + listaPeliculas + "]";
+        return "Cliente [codiCliente=" + codiCliente + ", idUsuario=" + super.idUsuario  + ", fotoPerfil=" + fotoPerfil + ", telefono=" + telefono
+                + ", comentarioPref=" + comentarioPref + ", carrito=" + carrito + ", tarjeta=" + tarjeta
+                + ", transaccion=" + transaccion + ", listaPeliculas=" + listaPeliculas + "]\n";
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Cliente cliente = (Cliente) obj;
+        return Objects.equals(correo, cliente.correo) || Objects.equals(telefono, cliente.telefono);
     }
 
 }
