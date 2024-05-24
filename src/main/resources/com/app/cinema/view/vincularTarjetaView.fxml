@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="339.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.VincularTarjetaViewController">
+   <children>
+      <GridPane layoutX="67.0" layoutY="84.0" prefHeight="180.0" prefWidth="467.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Numero Cuenta" />
+            <TextField fx:id="fieldNumCuenta" GridPane.rowIndex="1" />
+            <Label text="Fecha Caducidad" GridPane.rowIndex="2" />
+            <Label text="CVC" GridPane.rowIndex="4" />
+            <TextField fx:id="fieldCVC" GridPane.rowIndex="5" />
+            <DatePicker fx:id="datePickerFechaCaducidad" prefHeight="31.0" prefWidth="491.0" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Label layoutX="67.0" layoutY="51.0" prefHeight="21.0" prefWidth="134.0" text="VINCULAR TARJETA" />
+      <Button fx:id="botonVincular" layoutX="460.0" layoutY="288.0" mnemonicParsing="false" onAction="#accionVincularBoton" text="Vincular" />
+   </children>
+</AnchorPane>

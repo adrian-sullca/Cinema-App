@@ -5,11 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.PerfilClienteViewController">
    <children>
       <AnchorPane layoutY="100.0" prefHeight="605.0" prefWidth="859.0" styleClass="background2">
          <children>
-            <GridPane layoutX="415.0" layoutY="20.0" prefHeight="261.0" prefWidth="399.0">
+            <GridPane layoutX="320.0" layoutY="14.0" prefHeight="336.0" prefWidth="494.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="168.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="231.0" />
@@ -29,29 +29,23 @@
                   <Label styleClass="txt2" text="Apellido:" GridPane.rowIndex="1" />
                   <Label styleClass="txt2" text="Nombre:" />
                   <Label styleClass="txt2" text="Correo:" GridPane.rowIndex="2" />
-                  <TextField prefHeight="31.0" GridPane.columnIndex="1" />
-                  <TextField prefHeight="31.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField prefHeight="31.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField prefHeight="31.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField prefHeight="31.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField prefHeight="31.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="fieldNombreTxt" prefHeight="40.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="fieldApellidoTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="fieldCorreoTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="fieldTelefonoTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="fieldTarjetaVinculadaTxt" editable="false" prefHeight="40.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="datePickerFechaNacimiento" prefHeight="40.0" prefWidth="298.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <HBox layoutX="320.0" layoutY="371.0" prefHeight="40.0" prefWidth="494.0" spacing="29.0">
+            <HBox layoutX="494.0" layoutY="371.0" prefHeight="40.0" prefWidth="320.0" spacing="29.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Mover Saldo">
+                  <Button fx:id="botonVincularTarjeta" mnemonicParsing="false" onAction="#accionVincularTarjetaBoton" prefHeight="40.0" prefWidth="145.0" text="Vincular Tarjeta">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Vincular Tarjeta">
-                     <styleClass>
-                        <String fx:value="txt2" />
-                        <String fx:value="buttonAzul" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Editar datos">
+                  <Button fx:id="botonActualizarDatos" mnemonicParsing="false" onAction="#accionEditarDatosBoton" prefHeight="40.0" prefWidth="145.0" text="Actualizar Datos">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
@@ -59,15 +53,9 @@
                   </Button>
                </children>
             </HBox>
-            <VBox layoutX="45.0" layoutY="301.0" prefHeight="111.0" prefWidth="194.0" spacing="29.0" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="45.0">
+            <VBox layoutX="45.0" layoutY="301.0" prefHeight="40.0" prefWidth="194.0" spacing="29.0" AnchorPane.bottomAnchor="264.0" AnchorPane.leftAnchor="45.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Cambiar Foto">
-                     <styleClass>
-                        <String fx:value="buttonAzul" />
-                        <String fx:value="txt2" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Recargar Saldo">
+                  <Button fx:id="botonCambiarFoto" mnemonicParsing="false" onAction="#accionCambiarFotoBoton" prefHeight="40.0" prefWidth="300.0" text="Cambiar Foto">
                      <styleClass>
                         <String fx:value="buttonAzul" />
                         <String fx:value="txt2" />
@@ -75,8 +63,9 @@
                   </Button>
                </children>
             </VBox>
-            <TextField layoutX="45.0" layoutY="441.0" prefHeight="135.0" prefWidth="194.0" AnchorPane.bottomAnchor="29.0" />
-            <TextField layoutX="320.0" layoutY="441.0" prefHeight="135.0" prefWidth="494.0" />
+            <TextField fx:id="fieldSaldoTxt" layoutX="45.0" layoutY="441.0" prefHeight="135.0" prefWidth="194.0" AnchorPane.bottomAnchor="29.0" />
+            <TextField fx:id="fieldComentarioPrefTxt" layoutX="320.0" layoutY="441.0" prefHeight="135.0" prefWidth="494.0" />
+            <ImageView fx:id="imageViewFotoCliente" fitHeight="261.0" fitWidth="194.0" layoutX="45.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />

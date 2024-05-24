@@ -7,30 +7,30 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.GestionDeReseñasViewController">
    <children>
       <AnchorPane layoutY="100.0" prefHeight="605.0" prefWidth="859.0" styleClass="background2">
          <children>
-            <TableView layoutX="50.0" layoutY="25.0" prefHeight="483.0" prefWidth="759.0">
+            <TableView fx:id="tableViewReseñas" layoutX="50.0" layoutY="25.0" onMouseClicked="#seleccionarReseñaTabla" prefHeight="483.0" prefWidth="759.0">
               <columns>
-                  <TableColumn prefWidth="66.0" text="Codigo" />
-                <TableColumn prefWidth="111.0" text="Nombre" />
-                <TableColumn prefWidth="112.0" text="Apellido" />
-                  <TableColumn prefWidth="104.0" text="Correo" />
-                  <TableColumn prefWidth="123.0" text="Telefono" />
-                  <TableColumn prefWidth="142.0" text="Nacimiento:" />
-                  <TableColumn minWidth="0.0" prefWidth="100.0" text="Tarjeta" />
+                  <TableColumn fx:id="tableColumnCodiCliente" prefWidth="73.0" text="C. Cliente" />
+                <TableColumn fx:id="tableColumnNombre" prefWidth="86.0" text="Nombre" />
+                <TableColumn fx:id="tableColumnApellido" prefWidth="78.0" text="Apellido" />
+                  <TableColumn fx:id="tableColumnPelicula" prefWidth="123.0" text="Pelicula" />
+                  <TableColumn fx:id="tableColumnContenido" prefWidth="167.0" text="Contenido" />
+                  <TableColumn fx:id="tableColumnEstado" prefWidth="150.0" text="Estado" />
+                  <TableColumn fx:id="tableColumnFechaReseña" prefWidth="81.0" text="F. Reseña" />
               </columns>
             </TableView>
             <HBox layoutX="461.0" layoutY="300.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0" AnchorPane.bottomAnchor="39.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Aprobar">
+                  <Button fx:id="aprobarBoton" mnemonicParsing="false" onAction="#accionAprobarBoton" prefHeight="40.0" prefWidth="145.0" text="Aprobar">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="Desaprobar">
+                  <Button fx:id="desaprobarBoton" mnemonicParsing="false" onAction="#accionDesaprobarBoton" prefHeight="40.0" prefWidth="145.0" text="Desaprobar">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
@@ -38,7 +38,6 @@
                   </Button>
                </children>
             </HBox>
-            <HBox layoutX="461.0" layoutY="330.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="50.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">

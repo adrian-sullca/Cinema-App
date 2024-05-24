@@ -19,6 +19,12 @@ public class RootLayoutClienteViewController {
     @FXML
     private Button catalogoBoton;
     @FXML
+    private Button carritoBoton;
+    @FXML
+    private Button historialBoton;
+    @FXML
+    private Button listaDePeliculasBoton;
+    @FXML
     private Button cerrarSesionBoton;
 
     public void mostrarRootLayoutCliente() {
@@ -33,6 +39,18 @@ public class RootLayoutClienteViewController {
     @FXML
     private void accionCatalogoBoton(ActionEvent event) {
         GestionarVistaUtils.cargarVista("view/catalogoView.fxml", rootLayoutClienteView);
+    }
+    @FXML
+    private void accionCarritoBoton(ActionEvent event) {
+        GestionarVistaUtils.cargarVista("view/catalogoView.fxml", rootLayoutClienteView); //cambiar view
+    }
+    @FXML
+    private void accionHistorialBoton(ActionEvent event) {
+        GestionarVistaUtils.cargarVista("view/historialClienteView.fxml", rootLayoutClienteView);
+    }
+    @FXML
+    private void accionListaDePeliculasBoton(ActionEvent event) {
+        GestionarVistaUtils.cargarVista("view/catalogoView.fxml", rootLayoutClienteView); //cambiar view
     }
 
     @FXML

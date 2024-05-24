@@ -14,6 +14,7 @@ public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
     private final String DELETE = "DELETE FROM TARJETA WHERE codi_cliente=?"; //modificar
     private final String SELECTBYID = "SELECT * FROM TARJETA WHERE id_tarjeta=?"; //modificar
     private final String SELECTALL = "SELECT * FROM TARJETA";
+    private final String SELECTBYNUMEROFECHACVC = "SELECT * FROM TARJETA WHERE numero=? AND caducidad=? AND cvc=?";
 
 
     @Override
@@ -51,6 +52,31 @@ public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
                 double saldoDiponible = rs.getDouble("saldo_disponible");
 
                 tarjeta = new Cuenta(idCuenta, numeroCuenta, caducidad, CVC, saldoDiponible);
+            }
+            closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tarjeta;
+    }
+
+    public Cuenta selectByNumeroFechaCVC(long numero, Date caducidad, int cvc) {
+        Cuenta tarjeta = null;
+        try {
+            connect();
+            PreparedStatement ps = connection.prepareStatement(SELECTBYNUMEROFECHACVC);
+            ps.setLong(1, numero);
+            ps.setDate(2, caducidad);
+            ps.setInt(3, cvc);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int idCuenta = rs.getInt("id_tarjeta");
+                long numeroCuenta = rs.getLong("numero");
+                Date fechaCaducidad = rs.getDate("caducidad");
+                int CVC = rs.getInt("cvc");
+                double saldoDiponible = rs.getDouble("saldo_disponible");
+
+                tarjeta = new Cuenta(idCuenta, numeroCuenta, fechaCaducidad, CVC, saldoDiponible);
             }
             closeConnection();
         } catch (Exception e) {

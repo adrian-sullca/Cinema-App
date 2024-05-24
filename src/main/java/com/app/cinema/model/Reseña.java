@@ -77,7 +77,7 @@ public class Reseña {
     @Override
     public String toString() {
         return "Reseña [idReseña=" + idReseña + ", contenido=" + contenido + ", fechaReseña=" + fechaReseña
-                + ", estado=" + estado + ", cliente=" + cliente + ", pelicula=" + pelicula + "]";
+                + ", estado=" + estado + ", cliente=" + cliente.getCodiCliente() + ", pelicula=" + pelicula.getTitulo() + "]\n";
     }
 
 }

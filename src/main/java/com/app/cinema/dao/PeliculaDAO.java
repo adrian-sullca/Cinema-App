@@ -7,24 +7,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.stream.Collectors;
 import com.app.cinema.enums.Genero;
 import com.app.cinema.enums.Rol;
+import com.app.cinema.enums.TipoUsuario;
 import com.app.cinema.model.Cliente;
 import com.app.cinema.model.Cuenta;
 import com.app.cinema.model.DNI;
 import com.app.cinema.model.Pelicula;
+import com.app.cinema.model.Reseña;
 import com.app.cinema.model.Trabajador;
 import com.app.cinema.model.Usuario;
 
 public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> {
-    private final String INSERT = "INSERT INTO PELICULA(portada, titulo, genero, duracion, descripcion) VALUES(?,?,?,?,?)";
-    private final String UPDATE = "UPDATE PELICULA SET portada=?, titulo=?, genero=?, duracion=?, descripcion=? WHERE id_pelicula=?";
+    private final String INSERT = "INSERT INTO PELICULA(portada, titulo, genero, duracion, descripcion, precio) VALUES(?,?,?,?,?,?)";
+    private final String UPDATE = "UPDATE PELICULA SET portada=?, titulo=?, genero=?, duracion=?, descripcion=?, precio=? WHERE id_pelicula=?";
     private final String DELETE = "DELETE FROM PELICULA WHERE id_pelicula=?";
     private final String SELECTBYID = "SELECT * FROM PELICULA WHERE id_pelicula=?";
+    private final String SELECTBYGENERO = "SELECT * FROM PELICULA WHERE genero=?";
+    private final String SELECTBYTITULO = "SELECT * FROM PELICULA WHERE titulo LIKE ?";
     private final String SELECTALL = "SELECT * FROM PELICULA";
-
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    
     @Override
     public void insert(Pelicula t) {
         PreparedStatement ps = null;
@@ -37,6 +40,7 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
             ps.setString(3, t.getGenero().name());
             ps.setDouble(4, t.getDuracion());
             ps.setString(5, t.getDescripcion());
+            ps.setDouble(6, t.getPrecio());
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 0) {
                 rs = ps.getGeneratedKeys();
@@ -75,7 +79,8 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
             ps.setString(3, t.getGenero().name());
             ps.setDouble(4, t.getDuracion());
             ps.setString(5, t.getDescripcion());
-            ps.setInt(6, t.getIdPelicula());
+            ps.setDouble(6, t.getPrecio());
+            ps.setInt(7, t.getIdPelicula());
             if (ps.executeUpdate() != 0) {
                 System.out.println("Pelicula modificada correctamente en BBDD.");
             }
@@ -101,17 +106,13 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
     }
     @Override
     public Pelicula selectById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'selectById'");
-    }
-    @Override
-    public List<Pelicula> selectAll() {
-        ArrayList<Pelicula> peliculas = new ArrayList<>();
+        Pelicula pelicula = null;
         try {
             connect();
-            PreparedStatement ps = connection.prepareStatement(SELECTALL);
+            PreparedStatement ps = connection.prepareStatement(SELECTBYID);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
 
                 int id_pelicula = rs.getInt("id_pelicula");
                 String fotoPortada = rs.getString("portada");
@@ -120,10 +121,103 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
                 String descripcion = rs.getString("descripcion");
                 String generoString = rs.getString("genero");
                 Genero genero = Genero.valueOf(generoString);
+                double precio = rs.getDouble("precio");
                 //Asignar reseñas a cada pelicula 
                 //MODIFICAR: De momento lo dejare en null
                 //list reseñas
-                Pelicula pelicula = new Pelicula(id_pelicula, fotoPortada, titulo, duracion, descripcion, genero, null);
+                pelicula = new Pelicula(id_pelicula, fotoPortada, titulo, precio, duracion, descripcion, genero, null);
+            }
+            closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pelicula;
+    }
+
+    public List<Pelicula> selectPeliculasByGenero(Genero genero) {
+        List<Pelicula> peliculasGenero = new ArrayList<>();
+    try {
+        connect();
+        PreparedStatement ps = connection.prepareStatement(SELECTBYGENERO);
+        ps.setString(1, genero.name());
+        ResultSet rs = ps.executeQuery();
+        ReseñasDAO reseñasDAO = new ReseñasDAO();
+        List<Reseña> reseñasList = reseñasDAO.selectAll();
+        while (rs.next()) {
+            int id_pelicula = rs.getInt("id_pelicula");
+            String fotoPortada = rs.getString("portada");
+            String titulo = rs.getString("titulo");
+            double duracion = rs.getDouble("duracion");
+            String descripcion = rs.getString("descripcion");
+            double precio = rs.getDouble("precio");
+            List<Reseña> reseñasDeLaPelicula = reseñasList.stream().filter(reseña -> reseña.getPelicula().getIdPelicula() == id_pelicula).collect(Collectors.toList());
+            Pelicula pelicula = new Pelicula(id_pelicula, fotoPortada, titulo, precio, duracion, descripcion, genero, reseñasDeLaPelicula);
+            peliculasGenero.add(pelicula);
+        }
+        closeConnection();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return peliculasGenero;
+    }
+
+    public List<Pelicula> buscarPeliculasPorTitulo(String titulo) {
+        List<Pelicula> peliculas = new ArrayList<>();
+        try {
+            connect();
+            PreparedStatement ps = connection.prepareStatement(SELECTBYTITULO);
+            ps.setString(1, "%" + titulo + "%");
+            ResultSet rs = ps.executeQuery();
+            ReseñasDAO reseñasDAO = new ReseñasDAO();
+            List<Reseña> reseñasList = reseñasDAO.selectAll();
+            while (rs.next()) {
+                int id_pelicula = rs.getInt("id_pelicula");
+                String fotoPortada = rs.getString("portada");
+                String tituloPelicula = rs.getString("titulo");
+                double duracion = rs.getDouble("duracion");
+                String descripcion = rs.getString("descripcion");
+                String generoString = rs.getString("genero");
+                Genero genero = Genero.valueOf(generoString);
+                double precio = rs.getDouble("precio");
+                List<Reseña> reseñasDeLaPelicula = reseñasList.stream()
+                        .filter(reseña -> reseña.getPelicula().getIdPelicula() == id_pelicula)
+                        .collect(Collectors.toList());
+                Pelicula pelicula = new Pelicula(id_pelicula, fotoPortada, tituloPelicula, precio, duracion, descripcion, genero, reseñasDeLaPelicula);
+                peliculas.add(pelicula);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return peliculas;
+    }
+
+    @Override
+    public List<Pelicula> selectAll() {
+        ArrayList<Pelicula> peliculas = new ArrayList<>();
+        try {
+            connect();
+            PreparedStatement ps = connection.prepareStatement(SELECTALL);
+            ResultSet rs = ps.executeQuery();
+            ReseñasDAO reseñasDAO = new ReseñasDAO();
+            List<Reseña> reseñasList = reseñasDAO.selectAll();
+            List<Reseña> reseñasPelicula = new ArrayList<>();
+            while (rs.next()) {
+
+                int id_pelicula = rs.getInt("id_pelicula");
+                String fotoPortada = rs.getString("portada");
+                String titulo = rs.getString("titulo");
+                double duracion = rs.getDouble("duracion");
+                String descripcion = rs.getString("descripcion");
+                String generoString = rs.getString("genero");
+                Genero genero = Genero.valueOf(generoString);    
+                double precio = rs.getDouble("precio");
+                List<Reseña> reseñasDeLaPelicula = reseñasList.stream()
+                .filter(reseña -> reseña.getPelicula().getIdPelicula() == id_pelicula).collect(Collectors.toList());
+
+                // Crear la película con las reseñas correspondientes
+                Pelicula pelicula = new Pelicula(id_pelicula, fotoPortada, titulo, precio, duracion, descripcion, genero, reseñasDeLaPelicula);
                 peliculas.add(pelicula);
                 }
             closeConnection();

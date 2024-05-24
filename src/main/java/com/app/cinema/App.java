@@ -40,7 +40,6 @@ public class App extends Application {
         launch(args);
     }
 }
-
-
 // borrar esto
 // lucia.martinez@example.com
+// juan.perez@example.com

@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class RegistroViewController {
+
     @FXML
     private Button registrarseBoton;
 

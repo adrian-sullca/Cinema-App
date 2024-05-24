@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="peliculaCardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#seleccionarPelicula" prefHeight="198.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.PeliculaCardViewController">
+   <children>
+      <AnchorPane fx:id="anchorPaneImageView" layoutX="12.0" layoutY="11.0" prefHeight="148.0" prefWidth="130.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <ImageView fx:id="imageViewCardPelicula" fitHeight="168.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <VBox layoutX="595.0" layoutY="15.0" prefHeight="176.0" prefWidth="116.0" spacing="27.0" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
+         <children>
+            <Button fx:id="añadirCarritoBoton" layoutX="536.0" layoutY="36.0" mnemonicParsing="false" onAction="#accionAñadirCarritoBoton" prefHeight="40.0" prefWidth="121.0" text="Añadir Carrito" />
+            <Button fx:id="verReseñasBoton" layoutX="536.0" layoutY="88.0" mnemonicParsing="false" onAction="#accionVerReseñasBoton" prefHeight="40.0" prefWidth="121.0" text="Ver Reseñas" />
+            <Button fx:id="dejarReseñaBoton" layoutX="536.0" layoutY="141.0" mnemonicParsing="false" onAction="#accionDejarReseñaBoton" prefHeight="40.0" prefWidth="121.0" text="Dejar Reseña" />
+         </children>
+      </VBox>
+      <GridPane layoutX="165.0" layoutY="11.0" prefHeight="189.0" prefWidth="414.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="98.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="320.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Titulo" />
+            <Label text="Genero" GridPane.rowIndex="1" />
+            <Label text="Duracion" GridPane.rowIndex="2" />
+            <Label text="Descripcion" translateY="-20.0" GridPane.rowIndex="3" />
+            <TextArea fx:id="fieldDescripcionCardTxt" editable="false" maxWidth="345.0" prefHeight="27.0" prefWidth="347.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="15.0" top="5.0" />
+               </GridPane.margin>
+            </TextArea>
+            <TextField fx:id="fieldTituloCardTxt" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="fieldGeneroCardTxt" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="fieldDuracionCardTxt" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

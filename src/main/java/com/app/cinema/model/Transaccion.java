@@ -11,17 +11,26 @@ public class Transaccion {
 
     private int idTransaccion;
 
+    private Cliente cliente;
+
     private Date fechaTransaccion;
 
     private TipoTransaccion tipoTransaccion;
+
+    private double total;
     
     private List<LineaTransaccion> lineaTransaccion = new ArrayList<LineaTransaccion> ();
 
-    public Transaccion(int idTransaccion, Date fechaTransaccion, TipoTransaccion tipoTransaccion,
+    public Transaccion() {
+    }
+    
+    public Transaccion(int idTransaccion, Cliente cliente, Date fechaTransaccion, TipoTransaccion tipoTransaccion, double total,
             List<LineaTransaccion> lineaTransaccion) {
         this.idTransaccion = idTransaccion;
+        this.cliente = cliente;
         this.fechaTransaccion = fechaTransaccion;
         this.tipoTransaccion = tipoTransaccion;
+        this.total = total;
         this.lineaTransaccion = lineaTransaccion;
     }
 
@@ -57,10 +66,26 @@ public class Transaccion {
         this.lineaTransaccion = lineaTransaccion;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
-        return "Transaccion [idTransaccion=" + idTransaccion + ", fechaTransaccion=" + fechaTransaccion
-                + ", tipoTransaccion=" + tipoTransaccion + ", lineaTransaccion=" + lineaTransaccion + "]";
+        return "Transaccion [idTransaccion=" + idTransaccion + ", cliente=" + cliente.getCodiCliente()  + ", fechaTransaccion=" + fechaTransaccion
+                + ", tipoTransaccion=" + tipoTransaccion + ", total=" + total + ", lineaTransaccion=" + lineaTransaccion + "]\n";
     }
 
 }

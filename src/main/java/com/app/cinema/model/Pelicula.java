@@ -16,6 +16,8 @@ public class Pelicula {
 
     private String titulo;
 
+    private double precio;
+
     private double duracion;
 
     private String descripcion;
@@ -24,11 +26,12 @@ public class Pelicula {
 
     private List<Reseña> reseña = new ArrayList<Reseña> ();
 
-    public Pelicula(int idPelicula, String fotoPortada, String titulo, double duracion, String descripcion,
+    public Pelicula(int idPelicula, String fotoPortada, String titulo, double precio, double duracion, String descripcion,
             Genero genero, List<Reseña> reseña) {
         this.idPelicula = idPelicula;
         this.fotoPortada = fotoPortada;
         this.titulo = titulo;
+        this.precio = precio;
         this.duracion = duracion;
         this.descripcion = descripcion;
         this.genero = genero;
@@ -57,6 +60,14 @@ public class Pelicula {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public double getDuracion() {
@@ -94,8 +105,8 @@ public class Pelicula {
     @Override
     public String toString() {
         return "Pelicula [idPelicula=" + idPelicula + ", fotoPortada=" + fotoPortada + ", titulo=" + titulo
-                + ", duracion=" + duracion + ", descripcion=" + descripcion + ", genero=" + genero + ", reseña="
-                + reseña + "]";
+                + ", precio =" + precio + ", duracion=" + duracion + ", descripcion=" + descripcion + ", genero=" + genero + ", reseñas="
+                + reseña + "]\n";
     }
 
     @Override
@@ -109,4 +120,9 @@ public class Pelicula {
         Pelicula pelicula = (Pelicula) obj;
         return Objects.equals(fotoPortada, pelicula.fotoPortada);
     }
+
+    public String toComboBoxString() {
+        return titulo;
+    }
+
 }

@@ -11,22 +11,38 @@
    <children>
       <AnchorPane layoutY="100.0" prefHeight="605.0" prefWidth="859.0" styleClass="background2">
          <children>
+            <TextField fx:id="fieldPortadaTxt" layoutX="347.0" layoutY="-6.0" AnchorPane.bottomAnchor="400.0" />
             <TableView fx:id="tableViewPeliculas" layoutX="50.0" layoutY="25.0" onMouseClicked="#seleccionarPeliculaTabla" prefHeight="260.0" prefWidth="759.0">
               <columns>
-                  <TableColumn fx:id="tableColumnTitulo" prefWidth="185.0" text="Titulo" />
-                <TableColumn fx:id="tableColumnGenero" minWidth="0.0" prefWidth="106.0" text="Genero" />
-                <TableColumn fx:id="tableColumnDuracion" prefWidth="75.0" text="Duracion" />
-                  <TableColumn fx:id="tableColumnDescripcion" prefWidth="295.0" text="Descripcion" />
-                  <TableColumn fx:id="tableColumnFotoPortada" prefWidth="97.0" text="Foto Portada" />
+                  <TableColumn fx:id="tableColumnTitulo" prefWidth="164.0" text="Titulo" />
+                <TableColumn fx:id="tableColumnGenero" minWidth="0.0" prefWidth="100.0" text="Genero" />
+                  <TableColumn fx:id="tableColumnPrecio" prefWidth="72.0" text="Precio" />
+                <TableColumn fx:id="tableColumnDuracion" prefWidth="81.0" text="Duracion" />
+                  <TableColumn fx:id="tableColumnDescripcion" prefWidth="234.0" text="Descripcion" />
+                  <TableColumn fx:id="tableColumnFotoPortada" prefWidth="107.0" text="Foto Portada" />
               </columns>
             </TableView>
+            <TextArea fx:id="fieldDescripcionTxt" layoutX="460.0" prefHeight="166.0" prefWidth="226.0" wrapText="true" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="400.0" />
+            <HBox layoutX="463.0" layoutY="526.0" prefHeight="40.0" prefWidth="348.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="463.0" AnchorPane.rightAnchor="48.0">
+               <children>
+                  <Button fx:id="importarBoton" mnemonicParsing="false" onAction="#accionImportarBoton" prefHeight="40.0" prefWidth="102.0" text="Importar" translateX="41.0">
+                     <styleClass>
+                        <String fx:value="txt2" />
+                        <String fx:value="buttonAzul" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="204.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
             <GridPane layoutX="50.0" layoutY="350.0" prefHeight="224.0" prefWidth="759.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="104.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="205.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="39.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="104.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="205.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="215.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="77.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="174.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="166.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,18 +53,24 @@
                <children>
                   <TextField fx:id="fieldTituloTxt" prefHeight="40.0" GridPane.columnIndex="1" />
                   <Label text="Titulo" textFill="WHITE" />
-                  <Label text="Genero:" textFill="WHITE" GridPane.rowIndex="1" />
-                  <Label text="Duracion:" textFill="WHITE" GridPane.rowIndex="2" />
-                  <Label text="Portada (ruta):" textFill="WHITE" GridPane.rowIndex="3" />
-                  <Label text="Descripcion:" textFill="WHITE" GridPane.columnIndex="3" />
-                  <TextField fx:id="fieldDuracionTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Genero" textFill="WHITE" GridPane.rowIndex="1" />
+                  <Label text="Duracion" textFill="WHITE" GridPane.rowIndex="3" />
                   <ComboBox fx:id="cmbxGeneroPelicula" prefHeight="40.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="fieldPortadaTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="fieldPrecioTxt" prefHeight="40.0" prefWidth="348.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Precio" textFill="WHITE" GridPane.rowIndex="2" />
+                  <TextField fx:id="fieldDuracionTxt" prefHeight="40.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Descripcion" textFill="WHITE" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <HBox layoutX="461.0" layoutY="300.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0">
+            <HBox layoutX="461.0" layoutY="300.0" prefHeight="40.0" prefWidth="348.0" spacing="20.0">
                <children>
                   <Button fx:id="actualizarBoton" mnemonicParsing="false" onAction="#accionActualizarBoton" prefHeight="40.0" prefWidth="145.0" text="Actualizar">
+                     <styleClass>
+                        <String fx:value="txt2" />
+                        <String fx:value="buttonAzul" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="añadirBoton" mnemonicParsing="false" onAction="#accionAñadirBoton" prefHeight="40.0" prefWidth="145.0" text="Añadir">
                      <styleClass>
                         <String fx:value="txt2" />
                         <String fx:value="buttonAzul" />
@@ -62,30 +84,17 @@
                   </Button>
                </children>
             </HBox>
-            <HBox layoutX="461.0" layoutY="330.0" prefHeight="40.0" prefWidth="348.0" spacing="58.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="50.0">
-               <children>
-                  <Button fx:id="añadirBoton" mnemonicParsing="false" onAction="#accionAñadirBoton" prefHeight="40.0" prefWidth="145.0" text="Añadir">
-                     <styleClass>
-                        <String fx:value="txt2" />
-                        <String fx:value="buttonAzul" />
-                     </styleClass>
-                     <HBox.margin>
-                        <Insets left="204.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
             <Label layoutX="50.0" layoutY="305.0" text="AÑADIR PELICULA" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
+            <ImageView fx:id="imageViewPortada" fitHeight="153.0" fitWidth="100.0" layoutX="714.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="708.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <Label layoutX="61.0" layoutY="19.0" text="Gestion De Peliculas" />
          </children></AnchorPane>
-      <TextField fx:id="fieldDescripcionTxt" layoutX="-8.0" layoutY="-1.0" prefHeight="110.0" prefWidth="348.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="50.0" />
    </children>
 </AnchorPane>

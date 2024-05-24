@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.ReseñasViewController">
+   <children>
+      <ImageView fx:id="imageViewPelicula" fitHeight="168.0" fitWidth="138.0" layoutX="19.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+      <GridPane layoutX="172.0" layoutY="18.0" prefHeight="168.0" prefWidth="404.0" AnchorPane.bottomAnchor="408.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="18.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="96.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.0" minWidth="10.0" prefWidth="304.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Titulo" />
+            <Label text="Genero" GridPane.rowIndex="1" />
+            <Label text="Duracion" GridPane.rowIndex="2" />
+            <Label text="Descripcion" translateY="-10.0" GridPane.rowIndex="3" />
+            <TextField fx:id="fieldTituloPelicula" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="fieldGeneroPelicula" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="fieldDuracionPelicula" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="fieldDescripcionPelicula" editable="false" prefHeight="70.0" prefWidth="304.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </TextArea>
+         </children>
+      </GridPane>
+      <AnchorPane layoutX="19.0" layoutY="209.0" prefHeight="367.0" prefWidth="557.0">
+         <children>
+            <ScrollPane prefHeight="367.0" prefWidth="557.0">
+              <content>
+                  <VBox fx:id="vboxContainer" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

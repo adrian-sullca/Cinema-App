@@ -2,23 +2,32 @@ package com.app.cinema.model;
 
 public class LineaTransaccion {
 
+    private int idTransaccionLT;
     private int idLineaTransaccion;
-
-    private double cantidad;
-
-    private double precioUnitario;
-
-    private double precioFinal;
-
     private Pelicula pelicula;
+    private double precioPelicula;
+    private int cantidad;
+    private double totalLT;
 
-    public LineaTransaccion(int idLineaTransaccion, double cantidad, double precioUnitario, double precioFinal,
-            Pelicula pelicula) {
+    public LineaTransaccion(){
+    }
+    
+    public LineaTransaccion(int idTransaccionLT, int idLineaTransaccion, Pelicula pelicula, double precioPelicula,
+            int cantidad, double totalLT) {
+        this.idTransaccionLT = idTransaccionLT;
         this.idLineaTransaccion = idLineaTransaccion;
-        this.cantidad = cantidad;
-        this.precioUnitario = precioUnitario;
-        this.precioFinal = precioFinal;
         this.pelicula = pelicula;
+        this.precioPelicula = precioPelicula;
+        this.cantidad = cantidad;
+        this.totalLT = totalLT;
+    }
+
+    public int getIdTransaccionLT() {
+        return idTransaccionLT;
+    }
+
+    public void setIdTransaccionLT(int idTransaccionLT) {
+        this.idTransaccionLT = idTransaccionLT;
     }
 
     public int getIdLineaTransaccion() {
@@ -29,30 +38,6 @@ public class LineaTransaccion {
         this.idLineaTransaccion = idLineaTransaccion;
     }
 
-    public double getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(double cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public double getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
-
-    public double getPrecioFinal() {
-        return precioFinal;
-    }
-
-    public void setPrecioFinal(double precioFinal) {
-        this.precioFinal = precioFinal;
-    }
-
     public Pelicula getPelicula() {
         return pelicula;
     }
@@ -61,11 +46,34 @@ public class LineaTransaccion {
         this.pelicula = pelicula;
     }
 
-    @Override
-    public String toString() {
-        return "LineaTransaccion [idLineaTransaccion=" + idLineaTransaccion + ", cantidad=" + cantidad
-                + ", precioUnitario=" + precioUnitario + ", precioFinal=" + precioFinal + ", pelicula=" + pelicula
-                + "]";
+    public double getPrecioPelicula() {
+        return precioPelicula;
     }
 
+    public void setPrecioPelicula(double precioPelicula) {
+        this.precioPelicula = precioPelicula;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getTotalLT() {
+        return totalLT;
+    }
+
+    public void setTotalLT(double totalLT) {
+        this.totalLT = totalLT;
+    }
+
+    @Override
+    public String toString() {
+        return "LineaTransaccion [idTransaccion=" + idTransaccionLT + ", idLineaTransaccion=" + idLineaTransaccion
+                + ", pelicula=" + pelicula.getTitulo() + ", precioPelicula=" + precioPelicula + ", cantidad=" + cantidad
+                + ", totalLT=" + totalLT + "]";
+    }
 }

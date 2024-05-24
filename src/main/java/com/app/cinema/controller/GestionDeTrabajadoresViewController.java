@@ -6,13 +6,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.app.cinema.dao.TrabajadorDAO;
-import com.app.cinema.dao.TarjetaDAO;
 import com.app.cinema.dao.UsuarioDAO;
 import com.app.cinema.enums.Rol;
 import com.app.cinema.enums.TipoUsuario;
-import com.app.cinema.model.Trabajador;
-import com.app.cinema.model.Cuenta;
 import com.app.cinema.model.DNI;
+import com.app.cinema.model.Trabajador;
 import com.app.cinema.model.Usuario;
 import com.app.cinema.util.AlertUtils;
 

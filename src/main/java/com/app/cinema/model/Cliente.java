@@ -26,6 +26,9 @@ public class Cliente extends Usuario {
 
     private ListaPeliculas listaPeliculas;
 
+    public Cliente() {
+    }
+
     public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
     String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
     String comentarioPref, Cuenta tarjeta) {
@@ -122,6 +125,10 @@ public class Cliente extends Usuario {
         }
         Cliente cliente = (Cliente) obj;
         return Objects.equals(correo, cliente.correo) || Objects.equals(telefono, cliente.telefono);
+    }
+
+    public String toComboBoxString() {
+        return nombre + " " + apellido;
     }
 
 }

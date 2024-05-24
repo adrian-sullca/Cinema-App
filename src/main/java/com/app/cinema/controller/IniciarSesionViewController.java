@@ -9,8 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.app.cinema.App;
+import com.app.cinema.dao.ClienteDAO;
 import com.app.cinema.dao.DBConnection;
 import com.app.cinema.enums.TipoUsuario;
+import com.app.cinema.model.Cliente;
+import com.app.cinema.model.SesionUsuario;
 import com.app.cinema.model.Usuario;
 
 import javafx.event.ActionEvent;
@@ -63,6 +66,10 @@ public class IniciarSesionViewController {
         Usuario usuario = validarUsuario(correoUsuarioField.getText(), contraseñaUsuarioField.getText());
         if (usuario != null) {
             if (usuario.getTipoUsuario() == TipoUsuario.CLIENTE) {
+                ClienteDAO clienteDAO = new ClienteDAO();
+                Cliente clienteLogeado = clienteDAO.selectById(usuario.getIdUsuario());
+                System.out.println(clienteLogeado);
+                SesionUsuario.setClienteLogeado(clienteLogeado);
                 FXMLLoader loader = new FXMLLoader(App.class.getResource("view/RootLayoutClienteView.fxml"));
                 Parent root = loader.load();
                 RootLayoutClienteViewController controllerRLCV = loader.getController();
@@ -73,13 +80,14 @@ public class IniciarSesionViewController {
                 stage.setTitle("Vista Principal");
                 stage.setResizable(false);
                 Stage currentStage = (Stage) iniciarSesionBoton.getScene().getWindow();
+                System.out.println(usuario);
                 currentStage.close();
                 stage.show();
             } else if (usuario.getTipoUsuario() == TipoUsuario.TRABAJADOR) {
                 FXMLLoader loader = new FXMLLoader(App.class.getResource("view/RootLayoutTrabajadorView.fxml"));
                 Parent root = loader.load();
                 RootLayoutTrabajadorViewController controllerRLTV = loader.getController();
-                controllerRLTV.mostrarRootLayoutCliente();
+                controllerRLTV.mostrarRootLayoutTrabajador();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);

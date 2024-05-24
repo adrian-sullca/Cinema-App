@@ -3,8 +3,10 @@ package com.app.cinema.dao;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.app.cinema.enums.Genero;
 import com.app.cinema.model.Cliente;
 import com.app.cinema.model.Cuenta;
+import com.app.cinema.model.Pelicula;
 import com.app.cinema.model.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +16,7 @@ import java.sql.Statement;
 public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
 
     private final String INSERT = "INSERT INTO CLIENTE(id_usuario_c, telefono, tarjeta_vinculada, comentario_pref, foto_perfil_cliente) VALUES(?,?,?,?,?)";
-    private final String UPDATE = "UPDATE CLIENTE SET telefono=?, tarjeta_vinculada=? WHERE codi_cliente=?";
+    private final String UPDATE = "UPDATE CLIENTE SET telefono=?, tarjeta_vinculada=?, foto_perfil_cliente=? WHERE codi_cliente=?";
     private final String DELETE = "DELETE FROM CLIENTE WHERE id_usuario_c=?";
     private final String SELECTBYID = "SELECT * FROM CLIENTE WHERE codi_cliente=?";
     private final String SELECTALL = "SELECT * FROM CLIENTE";
@@ -71,7 +73,8 @@ public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
             PreparedStatement ps = connection.prepareStatement(UPDATE);
             ps.setInt(1, t.getTelefono());
             ps.setInt(2, t.getTarjeta().getIdCuenta());
-            ps.setInt(3, t.getCodiCliente());
+            ps.setString(3, t.getFotoPerfil());
+            ps.setInt(4, t.getCodiCliente());
             usuarioDAO.update(t);
             if (ps.executeUpdate() != 0) {
                 System.out.println("Cliente modificado correctamente en BBDD.");
@@ -100,8 +103,34 @@ public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
 
     @Override
     public Cliente selectById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'selectById'");
+        Cliente cliente = null;
+        try {
+            connect();
+            PreparedStatement ps = connection.prepareStatement(SELECTBYID);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int codi_cliente = rs.getInt("codi_cliente");
+                int id_usuario_c = rs.getInt("id_usuario_c");
+                int telefono = rs.getInt("telefono");
+                int id_tarjeta_vinculada = rs.getInt("tarjeta_vinculada");
+                String comentario_pref = rs.getString("comentario_pref");
+                String foto_perfil_cliente = rs.getString("foto_perfil_cliente");
+                Usuario usuario = usuarioDAO.selectById(id_usuario_c);
+                TarjetaDAO tarjetaDAO = new TarjetaDAO();
+                Cuenta tarjetaClientePorId = new Cuenta();
+                tarjetaClientePorId = tarjetaDAO.selectById(id_tarjeta_vinculada);
+                Cuenta tarjetaCliente = new Cuenta(tarjetaClientePorId.getIdCuenta(), tarjetaClientePorId.getNumeroCuenta(), tarjetaClientePorId.getCaducidad(), tarjetaClientePorId.getCVC(), tarjetaClientePorId.getSaldoDiponible());
+                if (usuario != null) {
+                    cliente = new Cliente(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getFechaNacimiento(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipoUsuario(), codi_cliente, foto_perfil_cliente, telefono, comentario_pref, tarjetaCliente);
+                }
+            }
+            closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cliente;
     }
 
     @Override

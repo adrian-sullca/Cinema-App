@@ -1,10 +1,8 @@
 package com.app.cinema.controller;
 
 import java.io.IOException;
-
 import java.sql.Date;
 import java.time.LocalDate;
-
 import java.util.List;
 
 import com.app.cinema.dao.ClienteDAO;
@@ -15,17 +13,18 @@ import com.app.cinema.model.Cliente;
 import com.app.cinema.model.Cuenta;
 import com.app.cinema.model.Usuario;
 import com.app.cinema.util.AlertUtils;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -84,13 +83,9 @@ public class GestionDeClientesViewController {
         this.tableColumnFechaNacimiento.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
         this.tableColumnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         this.tableColumnTarjeta.setCellValueFactory(new PropertyValueFactory<>("numeroCuenta"));
-
-        //ClienteDAO clienteDAO = new ClienteDAO();
-        //List<Cliente> clientesList = clienteDAO.selectAll();
-
-        //ObservableList<Cliente> clientes = FXCollections.observableArrayList(clientesList);
         this.tableViewClientes.setItems(clientes);
     }
+
     @FXML
     private void seleccionarClienteTabla(MouseEvent event) throws IOException {
         Cliente cliente = this.tableViewClientes.getSelectionModel().getSelectedItem();

@@ -1,5 +1,6 @@
 package com.app.cinema.controller;
 
+import com.app.cinema.App;
 import com.app.cinema.dao.PeliculaDAO;
 import com.app.cinema.dao.TrabajadorDAO;
 import com.app.cinema.dao.UsuarioDAO;
@@ -12,10 +13,12 @@ import com.app.cinema.model.Pelicula;
 import com.app.cinema.model.Trabajador;
 import com.app.cinema.model.Usuario;
 import com.app.cinema.util.AlertUtils;
+import java.io.File;
 
 import java.io.IOException;
 import java.util.List;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,9 +31,15 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import java.net.URL;
 
 public class GestionDePeliculasViewController {
     @FXML
@@ -48,6 +57,10 @@ public class GestionDePeliculasViewController {
     @FXML
     private TableColumn<Pelicula, String> tableColumnFotoPortada;
     @FXML
+    private Button immportarBoton;
+    @FXML
+    private ImageView imageViewPortada;
+    @FXML
     private Button añadirBoton;
     @FXML
     private Button actualizarBoton;
@@ -60,8 +73,13 @@ public class GestionDePeliculasViewController {
     @FXML
     private TextField fieldPortadaTxt;  
     @FXML
-    private TextField fieldDescripcionTxt;
-
+    private TextArea fieldDescripcionTxt;
+    @FXML
+    private Button importarBoton;
+    @FXML
+    private TextField fieldPrecioTxt;
+    @FXML
+    private TableColumn<Pelicula, Double> tableColumnPrecio;
 
     PeliculaDAO peliculaDAO = new PeliculaDAO();
     List<Pelicula> listaPeliculas = peliculaDAO.selectAll();
@@ -73,6 +91,7 @@ public class GestionDePeliculasViewController {
         initCmbxGeneroPelicula();
         this.tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         this.tableColumnGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
+        this.tableColumnPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
         this.tableColumnDuracion.setCellValueFactory(new PropertyValueFactory<>("duracion"));
         this.tableColumnDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         this.tableColumnFotoPortada.setCellValueFactory(new PropertyValueFactory<>("fotoPortada"));
@@ -85,9 +104,38 @@ public class GestionDePeliculasViewController {
         if (pelicula != null) {
             this.cmbxGeneroPelicula.setValue(pelicula.getGenero());
             this.fieldTituloTxt.setText(pelicula.getTitulo());
+            this.fieldPrecioTxt.setText(pelicula.getPrecio() + "");
             this.fieldDuracionTxt.setText(pelicula.getDuracion() + "");
             this.fieldDescripcionTxt.setText(pelicula.getDescripcion());
             this.fieldPortadaTxt.setText(pelicula.getFotoPortada());
+
+            String rutaImagen = "/com/app/cinema/img/" + pelicula.getFotoPortada();
+            URL imageUrl = getClass().getResource(rutaImagen);
+            if (imageUrl != null) {
+                Image image = new Image(imageUrl.toString());
+                imageViewPortada.setImage(image);
+                imageViewPortada.setFitWidth(100);
+                imageViewPortada.setFitHeight(153);
+                imageViewPortada.setPreserveRatio(true);
+                imageViewPortada.setSmooth(true);
+                imageViewPortada.setCache(true);
+                this.imageViewPortada.setImage(image);
+            } else {
+                System.out.println("No se pudo encontrar la imagen en la ruta: " + rutaImagen);
+            }
+        }
+    }
+    @FXML
+    public void accionImportarBoton(ActionEvent event) {
+        FileChooser openFile = new FileChooser();
+        openFile.getExtensionFilters().add(new ExtensionFilter("Open Image File", "*.png", "*.jpg"));
+
+        File file = openFile.showOpenDialog(App.getPrimaryStage());
+        if (file != null) {
+            String filePath = file.getAbsolutePath();
+            this.fieldPortadaTxt.setText(filePath);
+            Image image = new Image(file.toURI().toString());
+            this.imageViewPortada.setImage(image);
         }
     }
 
@@ -97,17 +145,18 @@ public class GestionDePeliculasViewController {
             Genero genero = this.cmbxGeneroPelicula.getValue();
             String titulo = this.fieldTituloTxt.getText();
             String duracion = this.fieldDuracionTxt.getText();
+            String precio = this.fieldPrecioTxt.getText();
             String descripcion = this.fieldDescripcionTxt.getText();
             String fotoPortada = this.fieldPortadaTxt.getText();
-
-            Pelicula pelicula = new Pelicula(0, fotoPortada, titulo, Double.parseDouble(duracion), descripcion, genero, null);
+            Pelicula pelicula = new Pelicula(0, fotoPortada, titulo, Double.parseDouble(precio), Double.parseDouble(duracion), descripcion, genero, null);
             if (peliculas.contains(pelicula)) {
                 AlertUtils.mostrarVentanaError(AlertType.ERROR, "Error", "Error: Pelicula ya registrada en el sistema");
             } else {
+                //MODIFICAR : LO DE RESEÑAS PARA CADA PELICULA
                 peliculaDAO.insert(pelicula);
                 List<Pelicula> listPeliculasBD = peliculaDAO.selectAll();
                 Pelicula ultimaPeliculaBD = listPeliculasBD.get(listPeliculasBD.size() - 1);
-                Pelicula peliculaNueva = new Pelicula(ultimaPeliculaBD.getIdPelicula(), fotoPortada, titulo, Double.parseDouble(duracion), descripcion, genero, null);
+                Pelicula peliculaNueva = new Pelicula(ultimaPeliculaBD.getIdPelicula(), fotoPortada, titulo, Double.parseDouble(precio), Double.parseDouble(duracion), descripcion, genero, null);
                 this.peliculas.add(peliculaNueva);
                 this.tableViewPeliculas.setItems(this.peliculas);
                 this.tableViewPeliculas.refresh();
@@ -128,22 +177,23 @@ public class GestionDePeliculasViewController {
                 Genero genero = this.cmbxGeneroPelicula.getValue();
                 String titulo = this.fieldTituloTxt.getText();
                 String duracion = this.fieldDuracionTxt.getText();
+                String precio = this.fieldPrecioTxt.getText();
                 String descripcion = this.fieldDescripcionTxt.getText();
                 String fotoPortada = this.fieldPortadaTxt.getText();
 
-                //boolean correoDuplicado = trabajadores.stream().anyMatch(t -> !t.equals(trabajador) && t.getCorreo().equals(correo));
                 boolean fotoPortadaDuplicada = peliculas.stream().anyMatch(p -> !p.equals(pelicula) && p.getFotoPortada().equals(fotoPortada));
     
                 if (fotoPortadaDuplicada) {
                     AlertUtils.mostrarVentanaError(AlertType.ERROR, "Error", "Error: Foto de portada duplicada");
                 } else {
                     pelicula.setTitulo(titulo);
+                    pelicula.setPrecio(Double.parseDouble(precio));
                     pelicula.setDuracion(Double.parseDouble(duracion));
                     pelicula.setDescripcion(descripcion);
                     pelicula.setGenero(genero);
                     pelicula.setFotoPortada(fotoPortada);
                     peliculaDAO.update(pelicula);
-                    AlertUtils.mostrarVentanaExito(AlertType.INFORMATION, "Operacion Exitosa", "Trabajador actualizado correctamente");
+                    AlertUtils.mostrarVentanaExito(AlertType.INFORMATION, "Operacion Exitosa", "Pelicula actualizada correctamente");
                     this.tableViewPeliculas.refresh();
 
                 }
