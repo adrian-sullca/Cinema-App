@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.app.cinema.enums.Genero;
+import com.app.cinema.model.Carrito;
 import com.app.cinema.model.Cliente;
 import com.app.cinema.model.Cuenta;
+import com.app.cinema.model.ListaPeliculas;
 import com.app.cinema.model.Pelicula;
+import com.app.cinema.model.Transaccion;
 import com.app.cinema.model.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +17,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
+
+    CarritoDAO carritoDAO = new CarritoDAO();
 
     private final String INSERT = "INSERT INTO CLIENTE(id_usuario_c, telefono, tarjeta_vinculada, comentario_pref, foto_perfil_cliente) VALUES(?,?,?,?,?)";
     private final String UPDATE = "UPDATE CLIENTE SET telefono=?, tarjeta_vinculada=?, foto_perfil_cliente=? WHERE codi_cliente=?";
@@ -36,7 +41,7 @@ public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
             ps.setInt(3, t.getTarjeta().getIdCuenta());
             ps.setString(4, t.getComentarioPref());
             ps.setString(5, t.getFotoPerfil());
-
+            //MODIFICAR
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 0) {
                 rs = ps.getGeneratedKeys();
@@ -117,13 +122,18 @@ public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
                 int id_tarjeta_vinculada = rs.getInt("tarjeta_vinculada");
                 String comentario_pref = rs.getString("comentario_pref");
                 String foto_perfil_cliente = rs.getString("foto_perfil_cliente");
+                int id_carrito = rs.getInt("id_carrito_c");
                 Usuario usuario = usuarioDAO.selectById(id_usuario_c);
                 TarjetaDAO tarjetaDAO = new TarjetaDAO();
                 Cuenta tarjetaClientePorId = new Cuenta();
                 tarjetaClientePorId = tarjetaDAO.selectById(id_tarjeta_vinculada);
                 Cuenta tarjetaCliente = new Cuenta(tarjetaClientePorId.getIdCuenta(), tarjetaClientePorId.getNumeroCuenta(), tarjetaClientePorId.getCaducidad(), tarjetaClientePorId.getCVC(), tarjetaClientePorId.getSaldoDiponible());
+                Carrito carritoCliente = carritoDAO.selectById(id_carrito);
+                //MODIFICAR PARA CARGAR LISTA DE PELIS Y YTANSACCIONES DE BDD
+                List<Transaccion> lisTransaccion = new ArrayList<>();
+                ListaPeliculas listaPeliculasCliente = new ListaPeliculas(null);
                 if (usuario != null) {
-                    cliente = new Cliente(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getFechaNacimiento(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipoUsuario(), codi_cliente, foto_perfil_cliente, telefono, comentario_pref, tarjetaCliente);
+                    cliente = new Cliente(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getFechaNacimiento(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipoUsuario(), codi_cliente, foto_perfil_cliente, telefono, comentario_pref, carritoCliente, tarjetaCliente, lisTransaccion, listaPeliculasCliente);
                 }
             }
             closeConnection();
@@ -148,15 +158,23 @@ public class ClienteDAO extends DBConnection implements DAO<Cliente, Integer> {
                 int id_tarjeta_vinculada = rs.getInt("tarjeta_vinculada");
                 String comentario_pref = rs.getString("comentario_pref");
                 String foto_perfil_cliente = rs.getString("foto_perfil_cliente");
+                int id_carrito = rs.getInt("id_carrito_c");
                 Usuario usuario = usuarioDAO.selectById(id_usuario_c);
                 TarjetaDAO tarjetaDAO = new TarjetaDAO();
                 Cuenta tarjetaClientePorId = new Cuenta();
                 tarjetaClientePorId = tarjetaDAO.selectById(id_tarjeta_vinculada);
                 Cuenta tarjetaCliente = new Cuenta(tarjetaClientePorId.getIdCuenta(), tarjetaClientePorId.getNumeroCuenta(), tarjetaClientePorId.getCaducidad(), tarjetaClientePorId.getCVC(), tarjetaClientePorId.getSaldoDiponible());
+                
+                Carrito carritoCliente = carritoDAO.selectById(id_carrito);
+                //MODIFICAR PARA CARGAR LISTA DE PELIS Y YTANSACCIONES DE BDD
+                List<Transaccion> lisTransaccion = new ArrayList<>();
+                ListaPeliculas listaPeliculasCliente = new ListaPeliculas(null);
+                
+
 
                 if (usuario != null) {
                     Cliente cliente = new Cliente(
-                        usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getFechaNacimiento(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipoUsuario(), codi_cliente, foto_perfil_cliente, telefono, comentario_pref, tarjetaCliente 
+                        usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getFechaNacimiento(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipoUsuario(), codi_cliente, foto_perfil_cliente, telefono, comentario_pref, carritoCliente, tarjetaCliente, lisTransaccion, listaPeliculasCliente 
                     );
                     clientes.add(cliente);
                 }

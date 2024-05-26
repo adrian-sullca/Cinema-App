@@ -1,7 +1,7 @@
 package com.app.cinema.controller;
 import java.io.IOException;
 import java.util.List;
-
+import java.util.ArrayList;
 import com.app.cinema.dao.PeliculaDAO;
 import com.app.cinema.dao.TransaccionDAO;
 import com.app.cinema.enums.Genero;
@@ -53,11 +53,9 @@ public class CatalogoViewController {
 
     TransaccionDAO transaccionDAO = new TransaccionDAO();
     List<Transaccion> transaciones = transaccionDAO.selectAll();
-    public void initialize() {
+    private List<Pelicula> carrito = new ArrayList<>();
 
-        for (Transaccion transaccion : transaciones) {
-            System.out.println(transaccion);
-        }
+    public void initialize() {
         Task<List<Pelicula>> loadPeliculasTask = new Task<>() {
             @Override
             protected List<Pelicula> call() throws Exception {

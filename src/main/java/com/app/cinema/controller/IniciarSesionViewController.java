@@ -57,7 +57,7 @@ public class IniciarSesionViewController {
             stage.show();
 
         } catch (IOException ex) {
-            ex.printStackTrace(); // Imprimir el stack trace para diagnosticar el problema
+            ex.printStackTrace();
         }
     }
 

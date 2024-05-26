@@ -4,30 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carrito {
-    private double totalCarrito;
-    private List<Pelicula> pelicula = new ArrayList<Pelicula> ();
+    private int id_carrito;
+    private List<Pelicula> peliculasCarrito = new ArrayList<Pelicula> ();
 
-    public Carrito(double totalCarrito, List<Pelicula> pelicula) {
-        this.totalCarrito = totalCarrito;
-        this.pelicula = pelicula;
+   
+
+    public Carrito(int id_carrito, List<Pelicula> peliculasCarrito) {
+        this.id_carrito = id_carrito;
+        this.peliculasCarrito = peliculasCarrito;
     }
-    
-    public double getTotalCarrito() {
-        return totalCarrito;
+
+
+
+    public int getId_carrito() {
+        return id_carrito;
     }
-    public void setTotalCarrito(double totalCarrito) {
-        this.totalCarrito = totalCarrito;
+
+
+
+    public void setId_carrito(int id_carrito) {
+        this.id_carrito = id_carrito;
     }
-    public List<Pelicula> getPelicula() {
-        return pelicula;
+
+
+
+    public List<Pelicula> getPeliculasCarrito() {
+        return peliculasCarrito;
     }
-    public void setPelicula(List<Pelicula> pelicula) {
-        this.pelicula = pelicula;
+
+
+
+    public void setPeliculasCarrito(List<Pelicula> peliculasCarrito) {
+        this.peliculasCarrito = peliculasCarrito;
     }
+
+
 
     @Override
     public String toString() {
-        return "Carrito [totalCarrito=" + totalCarrito + ", pelicula=" + pelicula + "]";
+        return "Carrito [totalCarrito=" + id_carrito + ", pelicula=" + peliculasCarrito + "]";
     }
 
 }

@@ -10,7 +10,7 @@ import com.app.cinema.model.Cuenta;
 public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
 
     private final String INSERT = "INSERT INTO TARJETA(nom,cognom,telefon,nif) VALUES(?,?,?,?)"; //modificar esto
-    private final String UPDATE = "UPDATE TARJETA SET telefono=?, tarjeta_vinculada=?, comentario_pref=?, foto_perfil_cliente=? WHERE codi_cliente=?"; //modificar
+    private final String UPDATE = "UPDATE TARJETA SET saldo_disponible=? WHERE id_tarjeta=?";
     private final String DELETE = "DELETE FROM TARJETA WHERE codi_cliente=?"; //modificar
     private final String SELECTBYID = "SELECT * FROM TARJETA WHERE id_tarjeta=?"; //modificar
     private final String SELECTALL = "SELECT * FROM TARJETA";
@@ -24,9 +24,17 @@ public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
     }
 
     @Override
-    public void update(Cuenta t) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void update(Cuenta cuenta) {
+        try {
+            connect();
+            PreparedStatement ps = connection.prepareStatement(UPDATE);
+            ps.setDouble(1, cuenta.getSaldoDiponible());
+            ps.setInt(2, cuenta.getIdCuenta());
+            ps.executeUpdate();
+            closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

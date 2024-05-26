@@ -1,0 +1,70 @@
+package com.app.cinema.controller;
+
+import com.app.cinema.model.Pelicula;
+
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import java.net.URL;
+
+public class PeliculaCardListaViewController {
+
+    @FXML
+    private AnchorPane anchorPaneImageView;
+
+    @FXML
+    private AnchorPane peliculaCardListaPane;
+
+    @FXML
+    private TextField fieldGeneroCardTxt;
+
+    @FXML
+    private ImageView imageViewCardPeliculaCarrito;
+
+    @FXML
+    private TextField fieldDuracionCardTxt;
+
+    @FXML
+    private TextArea fieldDescripcionCardTxt;
+
+    @FXML
+    private TextField fieldTituloCardTxt;
+
+    public void setPelicula(Pelicula pelicula) {
+        fieldTituloCardTxt.setText(pelicula.getTitulo());
+        fieldDescripcionCardTxt.setText(pelicula.getDescripcion());
+        fieldGeneroCardTxt.setText(pelicula.getGenero().name());
+        fieldDuracionCardTxt.setText(pelicula.getDuracion() + " min");
+
+        String rutaImagen = "/com/app/cinema/img/" + pelicula.getFotoPortada();
+        URL imageUrl = getClass().getResource(rutaImagen);
+        if (imageUrl != null) {
+            Task<Image> loadImageTask = new Task<>() {
+                @Override
+                protected Image call() throws Exception {
+                    return new Image(imageUrl.toString());
+                }
+            };
+
+            loadImageTask.setOnSucceeded(event -> {
+                Image image = loadImageTask.getValue();
+                imageViewCardPeliculaCarrito.setImage(image);
+                imageViewCardPeliculaCarrito.setFitWidth(138);
+                imageViewCardPeliculaCarrito.setFitHeight(168);
+                imageViewCardPeliculaCarrito.setPreserveRatio(false);
+                imageViewCardPeliculaCarrito.setSmooth(true);
+                imageViewCardPeliculaCarrito.setCache(true);
+            });
+
+            new Thread(loadImageTask).start();
+        } else {
+            System.out.println("No se pudo encontrar la imagen en la ruta: " + rutaImagen);
+        }
+
+        peliculaCardListaPane.setId(String.valueOf(pelicula.getIdPelicula()));
+    }
+}

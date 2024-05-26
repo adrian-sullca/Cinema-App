@@ -1,9 +1,15 @@
 package com.app.cinema.controller;
 import java.net.URL;
 
+import com.app.cinema.dao.CarritoPeliculasDAO;
 import com.app.cinema.dao.PeliculaDAO;
+import com.app.cinema.model.Cliente;
 import com.app.cinema.model.Pelicula;
+import com.app.cinema.model.SesionUsuario;
+import com.app.cinema.util.AlertUtils;
 
+import java.util.List;
+import java.util.ArrayList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -55,6 +62,11 @@ public class PeliculaCardViewController {
 
     PeliculaDAO peliculaDAO = new PeliculaDAO();
     private Pelicula peliculaSeleccionada;
+
+    CarritoPeliculasDAO carritoPeliculasDAO = new CarritoPeliculasDAO();
+
+    Cliente clienteLogeado = SesionUsuario.getClienteLogeado();
+    List<Pelicula> listaPeliculasCarrito = clienteLogeado.getCarrito().getPeliculasCarrito();
 
     public void setPelicula(Pelicula pelicula) {
         fieldTituloCardTxt.setText(pelicula.getTitulo());
@@ -107,11 +119,32 @@ public class PeliculaCardViewController {
         }
     }
 
-    
-    //MODIFICAR: PARA QUE ACEPTE RUTAS ABSOLUTAS Y RELATIVAS
     @FXML
     void accionAñadirCarritoBoton(ActionEvent event) {
-
+        try {
+            Button boton = (Button) event.getSource();
+            Node currentNode = boton;
+            while (currentNode != null && !(currentNode instanceof AnchorPane)) {
+                currentNode = currentNode.getParent();
+            }
+            if (currentNode != null) {
+                AnchorPane tarjetaPelicula = (AnchorPane) currentNode;
+                String idPelicula = tarjetaPelicula.getId();
+                Pelicula pelicula = peliculaDAO.selectById(Integer.parseInt(idPelicula));
+                if (pelicula != null) {
+                    this.listaPeliculasCarrito.add(pelicula);
+                    AlertUtils.mostrarVentanaExito(AlertType.INFORMATION, "Añadido al carrito", "Se ha anadido la película '" + pelicula.getTitulo() + "' al carrito.");
+                    System.out.println("Se ha anadido la película '" + pelicula.getTitulo() + "' al carrito.");
+                    carritoPeliculasDAO.insert(clienteLogeado.getCarrito());
+                } else {
+                    System.out.println("No se ha encontrado ninguna película asociada a esta tarjeta.");
+                }
+            } else {
+                System.out.println("No se pudo encontrar el AnchorPane contenedor de la película.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     public void accionVerReseñasBoton(ActionEvent event) {

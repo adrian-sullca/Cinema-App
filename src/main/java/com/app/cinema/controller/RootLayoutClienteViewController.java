@@ -42,7 +42,7 @@ public class RootLayoutClienteViewController {
     }
     @FXML
     private void accionCarritoBoton(ActionEvent event) {
-        GestionarVistaUtils.cargarVista("view/catalogoView.fxml", rootLayoutClienteView); //cambiar view
+        GestionarVistaUtils.cargarVista("view/carritoClienteView.fxml", rootLayoutClienteView);
     }
     @FXML
     private void accionHistorialBoton(ActionEvent event) {
@@ -50,7 +50,7 @@ public class RootLayoutClienteViewController {
     }
     @FXML
     private void accionListaDePeliculasBoton(ActionEvent event) {
-        GestionarVistaUtils.cargarVista("view/catalogoView.fxml", rootLayoutClienteView); //cambiar view
+        GestionarVistaUtils.cargarVista("view/listaPeliculasClienteView.fxml", rootLayoutClienteView);
     }
 
     @FXML

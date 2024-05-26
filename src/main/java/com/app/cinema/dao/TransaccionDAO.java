@@ -26,6 +26,7 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
     private final String UPDATE = "UPDATE TRABAJADOR SET rol=?, DNI=?, fecha_alta=?, salario=? WHERE codi_trabajador=?";
     private final String DELETE = "DELETE FROM TRABAJADOR WHERE id_usuario_t=?";
     private final String SELECTBYID = "SELECT * FROM TRANSACCION WHERE id_transaccion=?";
+    private final String SELECTBYCODICLIENTE = "SELECT * FROM TRANSACCION WHERE codi_cliente_t=?";
     private final String SELECTALL = "SELECT * FROM TRANSACCION";
 
     LineasTransaccionDAO lineasTransaccionDAO = new LineasTransaccionDAO();
@@ -133,6 +134,7 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
                 Date fechaTransaccion = rs.getDate("fecha_transaccion");
                 double total = rs.getDouble("total_t");
                 Cliente clienteTransaccion = clienteDAO.selectById(codi_cliente_t);
+                //MODIFICAR: LINEAS TRANSACCION NO NULL
                 transaccion = new Transaccion(idTransaccion, clienteTransaccion, fechaTransaccion, tipoTransaccion, total, null);
             }
             closeConnection();
@@ -142,6 +144,34 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
         return transaccion;
     }
 
+    public List<Transaccion> selectByCodiCliente(int codiCliente) {
+        List<Transaccion> transacciones = new ArrayList<>();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        try {
+            connect();
+            PreparedStatement ps = connection.prepareStatement(SELECTBYCODICLIENTE);
+            ps.setInt(1, codiCliente);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int idTransaccion = rs.getInt("id_transaccion");
+                int codi_cliente_t = rs.getInt("codi_cliente_t");
+                String tipoTransaccionString = rs.getString("tipo_transaccion");
+                TipoTransaccion tipoTransaccion = TipoTransaccion.valueOf(tipoTransaccionString);
+                Date fechaTransaccion = rs.getDate("fecha_transaccion");
+                double total = rs.getDouble("total_t");
+                Cliente clienteTransaccion = clienteDAO.selectById(codi_cliente_t);
+                List<LineaTransaccion> lineasTransaccionList = lineasTransaccionDAO.selectByTransaccionId(idTransaccion);
+                Transaccion transaccion = new Transaccion(idTransaccion, clienteTransaccion, fechaTransaccion, tipoTransaccion, total, lineasTransaccionList);
+                
+                transacciones.add(transaccion);
+            }
+            closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return transacciones;
+    }
+    
     @Override
     public List<Transaccion> selectAll() {
         ArrayList<Transaccion> transacciones = new ArrayList<>();

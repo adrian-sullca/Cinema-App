@@ -29,6 +29,23 @@ public class Cliente extends Usuario {
     public Cliente() {
     }
 
+    
+    public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
+            String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
+            String comentarioPref, Carrito carrito, Cuenta tarjeta, List<Transaccion> transaccion,
+            ListaPeliculas listaPeliculas) {
+        super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña, tipoUsuario);
+        this.codiCliente = codiCliente;
+        this.fotoPerfil = fotoPerfil;
+        this.telefono = telefono;
+        this.comentarioPref = comentarioPref;
+        this.carrito = carrito;
+        this.tarjeta = tarjeta;
+        this.transaccion = transaccion;
+        this.listaPeliculas = listaPeliculas;
+    }
+
+
     public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
     String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
     String comentarioPref, Cuenta tarjeta) {
@@ -73,7 +90,11 @@ public class Cliente extends Usuario {
     }
 
     public Carrito getCarrito() {
-        return carrito;
+        //DESCOMENTAR PARA INICIALIZAR CARRITO VACIO y no nulo
+        /* if (this.carrito == null) {
+            this.carrito = new Carrito(, new ArrayList<>());
+        } */
+        return this.carrito;
     }
 
     public void setCarrito(Carrito carrito) {
