@@ -11,6 +11,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 
+/**
+ * Este controlador maneja la vista de una tarjeta de película en una lista de películas en la aplicación Cinema.
+ * Permite mostrar los detalles de una película, como su título, descripción, género, duración y foto de portada.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class PeliculaCardListaViewController {
 
     @FXML
@@ -34,6 +42,11 @@ public class PeliculaCardListaViewController {
     @FXML
     private TextField fieldTituloCardTxt;
 
+    /**
+     * Establece los datos de la película en la tarjeta de la vista.
+     * 
+     * @param pelicula La película cuyos datos se mostrarán en la tarjeta.
+     */
     public void setPelicula(Pelicula pelicula) {
         fieldTituloCardTxt.setText(pelicula.getTitulo());
         fieldDescripcionCardTxt.setText(pelicula.getDescripcion());

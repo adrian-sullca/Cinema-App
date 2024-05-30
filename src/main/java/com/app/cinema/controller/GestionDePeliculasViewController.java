@@ -29,6 +29,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * Esta clase es un controlador para la gestión de películas en la aplicación Cinema.
+ * Permite al administrador agregar, actualizar y eliminar películas.
+ * 
+ * La vista muestra una tabla con la lista de películas registradas en el sistema.
+ * El administrador puede seleccionar una película de la tabla para ver y modificar sus detalles.
+ * También puede agregar una nueva película o eliminar una película existente.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class GestionDePeliculasViewController {
     @FXML
     private ComboBox<Genero> cmbxGeneroPelicula;
@@ -75,6 +87,10 @@ public class GestionDePeliculasViewController {
     private ObservableList<Pelicula> peliculas = FXCollections.observableArrayList(listaPeliculas);
 
 
+    /**
+     * Inicializa la vista de gestión de películas.
+     * Carga la lista de películas desde la base de datos y la muestra en la tabla.
+     */
     public void initialize(){
         initCmbxGeneroPelicula();
         this.tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -86,6 +102,13 @@ public class GestionDePeliculasViewController {
         this.tableViewPeliculas.setItems(peliculas);
     }
 
+    /**
+     * Maneja el evento de selección de una película en la tabla.
+     * Muestra los detalles de la película seleccionada en los campos correspondientes.
+     * 
+     * @param event El evento de clic del mouse.
+     * @throws IOException Si hay un error de entrada/salida.
+     */
     @FXML
     private void seleccionarPeliculaTabla(MouseEvent event) throws IOException {
         Pelicula pelicula = this.tableViewPeliculas.getSelectionModel().getSelectedItem();
@@ -113,6 +136,13 @@ public class GestionDePeliculasViewController {
             }
         }
     }
+
+    /**
+     * Maneja el evento del botón para importar una imagen de portada para la película.
+     * Permite al usuario seleccionar una imagen de su sistema de archivos y la muestra en la vista.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     public void accionImportarBoton(ActionEvent event) {
         FileChooser openFile = new FileChooser();
@@ -127,6 +157,12 @@ public class GestionDePeliculasViewController {
         }
     }
 
+    /**
+     * Maneja el evento del botón para añadir una nueva película.
+     * Agrega una nueva película a la base de datos y actualiza la tabla de películas.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     public void accionAñadirBoton(ActionEvent event) {
         try {
@@ -155,6 +191,13 @@ public class GestionDePeliculasViewController {
         }
     }
     
+    /**
+     * Maneja el evento del botón para actualizar una película existente.
+     * Actualiza los detalles de la película en la base de datos y refresca la tabla de películas.
+     * 
+     * @param event El evento de acción del botón.
+     * @throws IOException Si hay un error de entrada/salida.
+     */
     @FXML
     private void accionActualizarBoton(ActionEvent event) throws IOException {
         Pelicula pelicula = this.tableViewPeliculas.getSelectionModel().getSelectedItem();
@@ -191,7 +234,12 @@ public class GestionDePeliculasViewController {
         }
     }
     
-
+    /**
+     * Maneja el evento del botón para eliminar una película.
+     * Elimina la película seleccionada de la base de datos y actualiza la tabla de películas.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     private void accionEliminarBoton(ActionEvent event) {
         Pelicula pelicula = this.tableViewPeliculas.getSelectionModel().getSelectedItem();
@@ -206,6 +254,9 @@ public class GestionDePeliculasViewController {
         }
     }
     
+    /**
+     * Inicializa el ComboBox de género de películas con los valores del enum Genero.
+     */
     private void initCmbxGeneroPelicula() {
         this.cmbxGeneroPelicula.setItems(FXCollections.observableArrayList(Genero.values()));
     }

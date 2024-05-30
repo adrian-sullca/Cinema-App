@@ -32,6 +32,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
 
+/**
+ * Esta clase es un controlador para la gestión de transacciones en la aplicación Cinema.
+ * Permite al personal registrar nuevas transacciones de compra de películas y visualizar transacciones existentes.
+ * 
+ * La vista muestra un formulario para registrar una nueva transacción y una tabla con las transacciones registradas.
+ * También muestra los detalles de las líneas de transacción asociadas a una transacción seleccionada.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class GestionDeTransaccionesViewController {
 
     @FXML
@@ -92,6 +103,10 @@ public class GestionDeTransaccionesViewController {
     List<LineaTransaccion> listaLineaTransaccions = lineasTransaccionDAO.selectAll();
     private ObservableList<LineaTransaccion> lineasTransacciones = FXCollections.observableArrayList(listaLineaTransaccions);
 
+    /**
+     * Inicializa la vista de gestión de transacciones.
+     * Carga los datos de las películas, clientes y transacciones desde la base de datos y los muestra en la vista.
+     */
     public void initialize() {
         initComboBox();
         cargarDatosTableViewTransacciones();
@@ -99,22 +114,22 @@ public class GestionDeTransaccionesViewController {
         setearPrecioSegunPeliculaComboBox();
         setearFechaActual();
     }
+
     @FXML
     void accionDevolverBoton(ActionEvent event) throws IOException {
-
+        //MODIFICAR: IMPLEMENTAR ACCION DE DEVOLVER
     }
 
+    /**
+     * Maneja el evento del botón para añadir una nueva transacción al sistema.
+     * Valida los datos ingresados, crea la nueva transacción y la guarda en la base de datos.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     void accionAñadirBoton(ActionEvent event) throws IOException {
         TipoTransaccion tipoTransaccionSeleccionado = cmbxTipoTransaccion.getValue();
         if (tipoTransaccionSeleccionado == TipoTransaccion.COMPRA) {
-/*public Transaccion(int idTransaccion, Cliente cliente, Date fechaTransaccion, 
-TipoTransaccion tipoTransaccion, double total,
-List<LineaTransaccion> lineaTransaccion) 
-
-public LineaTransaccion(int idTransaccionLT, int idLineaTransaccion, 
-Pelicula pelicula, double precioPelicula,
-int cantidad, double totalLT) */
         Pelicula peliculaSeleccionada = cmbxPelicula.getValue();
         Cliente clienteSeleccionado = cmbxCliente.getValue();
             String pelicula = cmbxPelicula.getValue().getTitulo();
@@ -152,6 +167,9 @@ int cantidad, double totalLT) */
         }
     }
 
+    /**
+     * Carga los datos de las transacciones en la tabla de transacciones.
+     */
     private void cargarDatosTableViewTransacciones() {
         this.tableColumnIdTransaccion.setCellValueFactory(new PropertyValueFactory<>("idTransaccion"));
         this.tableColumnTipoTransaccion.setCellValueFactory(new PropertyValueFactory<>("tipoTransaccion"));
@@ -178,13 +196,21 @@ int cantidad, double totalLT) */
         
     }
 
+    /**
+     * Carga los datos de las líneas de transacción asociadas a una transacción seleccionada en la tabla.
+     * 
+     * @param transaccion La transacción seleccionada.
+     */
     private void cargarLineasDeTransaccionSeleccionada(Transaccion transaccion) {
         List<LineaTransaccion> lineasFiltradas = lineasTransaccionDAO.selectByTransaccionId(transaccion.getIdTransaccion());
         ObservableList<LineaTransaccion> lineas = FXCollections.observableArrayList(lineasFiltradas);
         tableViewLineasTransacciones.setItems(lineas);
     }
 
-
+    /**
+     * Inicializa los ComboBox de la vista con información de la base de datos de los clientes y películas
+     * y el combobox de tipo de transacción.
+     */
     private void initComboBox() {
         cmbxCliente.setItems(clientes);
         cmbxCliente.setConverter(new StringConverter<Cliente>() {
@@ -213,6 +239,9 @@ int cantidad, double totalLT) */
         });
     }
 
+    /**
+     * Establece el precio de la película seleccionada en el campo de texto de precio.
+     */
     private void setearPrecioSegunPeliculaComboBox() {
         cmbxPelicula.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -223,6 +252,9 @@ int cantidad, double totalLT) */
         });
     }
 
+    /**
+     * Establece la fecha actual en el campo de fecha de la transacción.
+     */
     private void setearFechaActual() {
         datePickerFActual.setValue(LocalDate.now());
         datePickerFActual.setDisable(true);

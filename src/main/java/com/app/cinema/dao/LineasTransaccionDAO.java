@@ -19,6 +19,11 @@ import com.app.cinema.model.LineaTransaccion;
 import com.app.cinema.model.Pelicula;
 import com.app.cinema.model.Transaccion;
 
+/**
+ * Clase para gestionar el acceso a datos de las líneas de transacción en la base de datos.
+ * 
+ * @author Adrian.
+ */
 public class LineasTransaccionDAO extends DBConnection implements DAO<LineaTransaccion, Integer>{
 
     private final String INSERT = "INSERT INTO LINEA_TRANSACCION(id_transaccion_lt, id_pelicula_lt, precio_pelicula, cantidad, total_lt) VALUES(?,?,?,?,?)";
@@ -29,6 +34,11 @@ public class LineasTransaccionDAO extends DBConnection implements DAO<LineaTrans
 
     PeliculaDAO peliculaDAO = new PeliculaDAO();
 
+    /**
+     * Inserta una nueva línea de transacción en la base de datos.
+     * 
+     * @param t La línea de transacción a insertar.
+     */
     @Override
     public void insert(LineaTransaccion t) {
         PreparedStatement ps = null;
@@ -89,6 +99,12 @@ public class LineasTransaccionDAO extends DBConnection implements DAO<LineaTrans
         throw new UnsupportedOperationException("Unimplemented method 'selectById'");
     }
 
+    /**
+     * Selecciona todas las líneas de transacción asociadas a una transacción.
+     * 
+     * @param idTransaccion El ID de la transacción asociada.
+     * @return Una lista de líneas de transacción asociadas a la transacción especificada.
+     */
     public List<LineaTransaccion> selectByTransaccionId(int idTransaccion) {
         List<LineaTransaccion> lineasTransaccionesPorID = new ArrayList<>();
         try {
@@ -114,6 +130,11 @@ public class LineasTransaccionDAO extends DBConnection implements DAO<LineaTrans
         return lineasTransaccionesPorID;
     }
 
+    /**
+     * Selecciona todas las líneas de transacción de la base de datos.
+     * 
+     * @return Una lista de todas las líneas de transacción almacenadas en la base de datos.
+     */
     @Override
     public List<LineaTransaccion> selectAll() {
         ArrayList<LineaTransaccion> lineasTransacciones = new ArrayList<>();

@@ -7,7 +7,9 @@ public class Carrito {
     private int id_carrito;
     private List<Pelicula> peliculasCarrito = new ArrayList<Pelicula> ();
 
-   
+    public Carrito() {
+
+    }
 
     public Carrito(int id_carrito, List<Pelicula> peliculasCarrito) {
         this.id_carrito = id_carrito;

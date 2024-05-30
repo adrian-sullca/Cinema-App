@@ -16,6 +16,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+/**
+ * Este controlador maneja la vista para vincular una tarjeta de crédito/débito a un cliente en la aplicación Cinema.
+ * Permite al cliente ingresar los detalles de la tarjeta y vincularla a su cuenta.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class VincularTarjetaViewController {
     
     @FXML
@@ -33,6 +41,13 @@ public class VincularTarjetaViewController {
     TarjetaDAO tarjetaDAO = new TarjetaDAO();
     Cliente clienteLogeado = SesionUsuario.getClienteLogeado();
     ClienteDAO clienteDAO = new ClienteDAO();
+
+    /**
+     * Acción realizada al presionar el botón de vincular tarjeta.
+     * Valida los campos ingresados por el usuario y vincula la tarjeta a la cuenta del cliente.
+     * 
+     * @param event El evento de acción asociado al botón.
+     */
     @FXML
     void accionVincularBoton(ActionEvent event) {
         try {

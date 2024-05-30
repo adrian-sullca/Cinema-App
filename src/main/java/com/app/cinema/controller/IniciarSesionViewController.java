@@ -26,6 +26,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Este controlador maneja la vista de inicio de sesión en la aplicación Cinema.
+ * Permite a los usuarios iniciar sesión con su correo electrónico y contraseña.
+ * Dependiendo del tipo de usuario (cliente o trabajador), los redirige a la vista principal correspondiente.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class IniciarSesionViewController {
 
     @FXML
@@ -39,6 +48,12 @@ public class IniciarSesionViewController {
 
     private DBConnection dbConnection = new DBConnection();
 
+    /**
+     * Maneja el evento de clic en el botón "Registrarse".
+     * Abre la vista de registro de usuario cuando se hace clic en el botón.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     private void accionRegistrarseBoton(ActionEvent event) {
         try {
@@ -61,13 +76,20 @@ public class IniciarSesionViewController {
         }
     }
 
+    /**
+     * Maneja el evento de clic en el botón "Iniciar Sesión".
+     * Valida las credenciales ingresadas por el usuario y redirige a la vista principal correspondiente.
+     * 
+     * @param event El evento de acción del botón.
+     * @throws IOException Si ocurre un error durante la carga de la vista principal.
+     */
     @FXML
     private void accionIniciarSesionBoton(ActionEvent event) throws IOException {
         Usuario usuario = validarUsuario(correoUsuarioField.getText(), contraseñaUsuarioField.getText());
         if (usuario != null) {
             if (usuario.getTipoUsuario() == TipoUsuario.CLIENTE) {
                 ClienteDAO clienteDAO = new ClienteDAO();
-                Cliente clienteLogeado = clienteDAO.selectById(usuario.getIdUsuario());
+                Cliente clienteLogeado = clienteDAO.selectByIdUsuario(usuario.getIdUsuario());
                 System.out.println(clienteLogeado);
                 SesionUsuario.setClienteLogeado(clienteLogeado);
                 FXMLLoader loader = new FXMLLoader(App.class.getResource("view/RootLayoutClienteView.fxml"));
@@ -102,6 +124,13 @@ public class IniciarSesionViewController {
         }
     }
 
+    /**
+     * Valida las credenciales del usuario en la base de datos.
+     * 
+     * @param correo El correo electrónico del usuario.
+     * @param contraseña La contraseña del usuario.
+     * @return El objeto Usuario si las credenciales son válidas, o null si no lo son.
+     */
     private Usuario validarUsuario(String correo, String contraseña) {
         dbConnection.connect();
         Connection conn = dbConnection.getConnection();

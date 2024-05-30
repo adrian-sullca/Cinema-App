@@ -30,6 +30,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Esta clase es un controlador para la gestión de trabajadores en la aplicación Cinema.
+ * Permite al administrador añadir, actualizar o eliminar trabajadores del sistema.
+ * 
+ * La vista muestra una tabla con la lista de trabajadores registrados en el sistema.
+ * El administrador puede seleccionar un trabajador de la tabla para ver o modificar sus detalles.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class GestionDeTrabajadoresViewController {
     @FXML
     private ComboBox<Rol> cmbxRolTrabajador;
@@ -86,6 +97,10 @@ public class GestionDeTrabajadoresViewController {
     private ObservableList<Trabajador> trabajadores = FXCollections.observableArrayList(listaTrabajadores);
 
 
+    /**
+     * Inicializa la vista de gestión de trabajadores.
+     * Carga la lista de trabajadores desde la base de datos y la muestra en la tabla.
+     */
     public void initialize(){
         initCmbxRolTrabajador();
         this.tableColumnRol.setCellValueFactory(new PropertyValueFactory<>("rol"));
@@ -106,10 +121,12 @@ public class GestionDeTrabajadoresViewController {
         this.tableViewTrabajadores.setItems(trabajadores);
     }
 
-    /*
-  
-    @FXML
-    private TextField fieldSalarioTxt;
+    /**
+     * Maneja el evento de selección de un trabajador en la tabla.
+     * Muestra los detalles del trabajador seleccionado en los campos de texto correspondientes.
+     * 
+     * @param event El evento de clic del mouse.
+     * @throws IOException Si hay un error de entrada/salida.
      */
     @FXML
     private void seleccionarTrabajadorTabla(MouseEvent event) throws IOException {
@@ -133,6 +150,12 @@ public class GestionDeTrabajadoresViewController {
         }
     }
 
+    /**
+     * Maneja el evento del botón para añadir un nuevo trabajador al sistema.
+     * Valida los datos ingresados, añade el nuevo trabajador a la base de datos y actualiza la tabla.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     public void accionAñadirBoton(ActionEvent event) {
         try {
@@ -177,7 +200,13 @@ public class GestionDeTrabajadoresViewController {
     }
     
 
-
+    /**
+     * Maneja el evento del botón para actualizar los datos de un trabajador existente.
+     * Valida los datos modificados, actualiza los detalles del trabajador en la base de datos y refresca la tabla.
+     * 
+     * @param event El evento de acción del botón.
+     * @throws IOException Si hay un error de entrada/salida.
+     */
     @FXML
     private void accionActualizarBoton(ActionEvent event) throws IOException {
         Trabajador trabajador = this.tableViewTrabajadores.getSelectionModel().getSelectedItem();
@@ -227,7 +256,12 @@ public class GestionDeTrabajadoresViewController {
         }
     }
     
-
+    /**
+     * Maneja el evento del botón para eliminar un trabajador del sistema.
+     * Elimina al trabajador seleccionado de la base de datos y actualiza la tabla.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     private void accionEliminarBoton(ActionEvent event) {
         Trabajador Trabajador = this.tableViewTrabajadores.getSelectionModel().getSelectedItem();
@@ -242,6 +276,9 @@ public class GestionDeTrabajadoresViewController {
         }
     }
     
+    /**
+     * Inicializa el ComboBox para seleccionar el rol del trabajador.
+     */
     private void initCmbxRolTrabajador() {
         this.cmbxRolTrabajador.setItems(FXCollections.observableArrayList(Rol.values()));
     }

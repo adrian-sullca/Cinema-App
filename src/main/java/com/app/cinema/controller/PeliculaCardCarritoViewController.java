@@ -28,6 +28,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Este controlador maneja la vista de una tarjeta de película en el carrito de compras de un cliente en la aplicación Cinema.
+ * Permite al cliente comprar o quitar una película de su carrito.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class PeliculaCardCarritoViewController {
 
     @FXML
@@ -67,10 +75,20 @@ public class PeliculaCardCarritoViewController {
 
     private CarritoClienteViewController carritoClienteViewController;
 
+    /**
+     * Establece el controlador del carrito de cliente asociado a esta tarjeta de película.
+     * 
+     * @param controller El controlador del carrito de cliente.
+     */
     public void setCarritoClienteViewController(CarritoClienteViewController controller) {
         this.carritoClienteViewController = controller;
     }
 
+    /**
+     * Realiza la acción de comprar una película desde el carrito.
+     * 
+     * @param event El evento de acción que desencadena la compra de la película.
+     */
     @FXML
     void accionComprarPeliculaBoton(ActionEvent event) {
         LineaTransaccion lineaTransaccionNueva = new LineaTransaccion();
@@ -119,6 +137,11 @@ public class PeliculaCardCarritoViewController {
         }
     }
 
+    /**
+     * Realiza la acción de quitar una película del carrito.
+     * 
+     * @param event El evento de acción que desencadena la eliminación de la película del carrito.
+     */
     @FXML
     void accionQuitarPeliculaBoton(ActionEvent event) {
         try {
@@ -143,6 +166,11 @@ public class PeliculaCardCarritoViewController {
         }
     }
 
+    /**
+     * Establece los datos de la película en la tarjeta de la vista.
+     * 
+     * @param pelicula La película cuyos datos se mostrarán en la tarjeta.
+     */
     public void setPelicula(Pelicula pelicula) {
         fieldTituloCardTxt.setText(pelicula.getTitulo());
         fieldDescripcionCardTxt.setText(pelicula.getDescripcion());

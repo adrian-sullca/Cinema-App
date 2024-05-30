@@ -28,6 +28,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Esta clase es un controlador para la gestión de clientes en la aplicación Cinema.
+ * Permite al administrador agregar, actualizar y eliminar clientes.
+ * 
+ * La vista muestra una tabla con la lista de clientes registrados en el sistema.
+ * El administrador puede seleccionar un cliente de la tabla para ver y modificar sus detalles.
+ * También puede agregar un nuevo cliente o eliminar un cliente existente.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class GestionDeClientesViewController {
     
     @FXML
@@ -74,7 +86,10 @@ public class GestionDeClientesViewController {
 
     private ObservableList<Cliente> clientes = FXCollections.observableArrayList(listaClientes);
 
-
+    /**
+     * Inicializa la vista de gestión de clientes.
+     * Carga la lista de clientes desde la base de datos y la muestra en la tabla.
+     */
     public void initialize(){
         this.tableColumnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.tableColumnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
@@ -86,6 +101,13 @@ public class GestionDeClientesViewController {
         this.tableViewClientes.setItems(clientes);
     }
 
+    /**
+     * Maneja el evento de selección de un cliente en la tabla.
+     * Muestra los detalles del cliente seleccionado en los campos de texto correspondientes.
+     * 
+     * @param event El evento de clic del mouse.
+     * @throws IOException Si hay un error de entrada/salida.
+     */
     @FXML
     private void seleccionarClienteTabla(MouseEvent event) throws IOException {
         Cliente cliente = this.tableViewClientes.getSelectionModel().getSelectedItem();
@@ -104,6 +126,12 @@ public class GestionDeClientesViewController {
         }
     }
 
+    /**
+     * Maneja el evento del botón para añadir un nuevo cliente.
+     * Agrega un nuevo cliente a la base de datos y actualiza la tabla de clientes.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     public void accionAñadirBoton(ActionEvent event) {
         try {
@@ -139,6 +167,13 @@ public class GestionDeClientesViewController {
         }
     }
 
+    /**
+     * Maneja el evento del botón para actualizar un cliente existente.
+     * Actualiza los detalles del cliente en la base de datos y refresca la tabla de clientes.
+     * 
+     * @param event El evento de acción del botón.
+     * @throws IOException Si hay un error de entrada/salida.
+     */
     @FXML
     private void accionActualizarBoton(ActionEvent event) throws IOException {
         Cliente cliente = this.tableViewClientes.getSelectionModel().getSelectedItem();
@@ -177,7 +212,12 @@ public class GestionDeClientesViewController {
         }
     }
     
-
+    /**
+     * Maneja el evento del botón para eliminar un cliente.
+     * Elimina el cliente seleccionado de la base de datos y actualiza la tabla de clientes.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     private void accionEliminarBoton(ActionEvent event) {
         Cliente cliente = this.tableViewClientes.getSelectionModel().getSelectedItem();

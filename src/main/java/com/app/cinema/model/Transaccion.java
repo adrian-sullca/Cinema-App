@@ -34,6 +34,15 @@ public class Transaccion {
         this.lineaTransaccion = lineaTransaccion;
     }
 
+    public Transaccion(int idTransaccion, Date fechaTransaccion, TipoTransaccion tipoTransaccion, double total,
+            List<LineaTransaccion> lineaTransaccion) {
+        this.idTransaccion = idTransaccion;
+        this.fechaTransaccion = fechaTransaccion;
+        this.tipoTransaccion = tipoTransaccion;
+        this.total = total;
+        this.lineaTransaccion = lineaTransaccion;
+    }
+
     public int getIdTransaccion() {
         return idTransaccion;
     }

@@ -29,7 +29,48 @@ public class Cliente extends Usuario {
     public Cliente() {
     }
 
+
+    public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
+            String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
+            String comentarioPref, Carrito carrito) {
+        super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña, tipoUsuario);
+        this.codiCliente = codiCliente;
+        this.fotoPerfil = fotoPerfil;
+        this.telefono = telefono;
+        this.comentarioPref = comentarioPref;
+        this.carrito = carrito;
+    }
+
+    //constructo para el registro de cliente
+    public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
+            String contraseña, TipoUsuario tipoUsuario, int codiCliente, int telefono) {
+        super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña, tipoUsuario);
+        this.codiCliente = codiCliente;
+        this.telefono = telefono;
+    }
+
+    public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
+            String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
+            String comentarioPref) {
+        super(idUsuario, nombre, apellido, fechaNacimiento, correo, contraseña, tipoUsuario);
+        this.codiCliente = codiCliente;
+        this.fotoPerfil = fotoPerfil;
+        this.telefono = telefono;
+        this.comentarioPref = comentarioPref;
+    }
+
+    public Cliente(String correo, String contraseña, int codiCliente, String fotoPerfil, int telefono,
+            String comentarioPref, Carrito carrito) {
+        super(correo, contraseña);
+        this.codiCliente = codiCliente;
+        this.fotoPerfil = fotoPerfil;
+        this.telefono = telefono;
+        this.comentarioPref = comentarioPref;
+        this.carrito = carrito;
+    }
+
     
+
     public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
             String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,
             String comentarioPref, Carrito carrito, Cuenta tarjeta, List<Transaccion> transaccion,
@@ -44,7 +85,6 @@ public class Cliente extends Usuario {
         this.transaccion = transaccion;
         this.listaPeliculas = listaPeliculas;
     }
-
 
     public Cliente(int idUsuario, String nombre, String apellido, Date fechaNacimiento, String correo,
     String contraseña, TipoUsuario tipoUsuario, int codiCliente, String fotoPerfil, int telefono,

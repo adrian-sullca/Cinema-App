@@ -14,7 +14,13 @@ import com.app.cinema.model.Cuenta;
 import com.app.cinema.model.DNI;
 import com.app.cinema.model.Trabajador;
 import com.app.cinema.model.Usuario;
-
+/**
+ * Clase para gestionar el acceso a datos de los trabajadores en la base de datos.
+ * Esta clase proporciona métodos para insertar, actualizar, eliminar y seleccionar trabajadores
+ * en la base de datos.
+ *
+ * @author Adrian
+ */
 public class TrabajadorDAO extends DBConnection implements DAO<Trabajador, Integer> {
     private final String INSERT = "INSERT INTO TRABAJADOR(id_usuario_t, DNI, rol, fecha_alta, salario) VALUES(?,?,?,?,?)";
     private final String UPDATE = "UPDATE TRABAJADOR SET rol=?, DNI=?, fecha_alta=?, salario=? WHERE codi_trabajador=?";
@@ -24,6 +30,11 @@ public class TrabajadorDAO extends DBConnection implements DAO<Trabajador, Integ
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+    /**
+     * Inserta un nuevo trabajador en la base de datos.
+     * 
+     * @param t El trabajador a insertar.
+     */
     @Override
     public void insert(Trabajador t) {
         PreparedStatement ps = null;
@@ -67,6 +78,12 @@ public class TrabajadorDAO extends DBConnection implements DAO<Trabajador, Integ
             }
         }
     }
+
+    /**
+     * Actualiza la información de un trabajador en la base de datos.
+     * 
+     * @param t El trabajador a actualizar.
+     */
     @Override
     public void update(Trabajador t) {
         try {
@@ -87,6 +104,12 @@ public class TrabajadorDAO extends DBConnection implements DAO<Trabajador, Integ
             e.printStackTrace();
         }
     }
+
+    /**
+     * Elimina un trabajador de la base de datos.
+     * 
+     * @param t El trabajador a eliminar.
+     */
     @Override
     public void delete(Trabajador t) {
         try {
@@ -107,6 +130,12 @@ public class TrabajadorDAO extends DBConnection implements DAO<Trabajador, Integ
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'selectById'");
     }
+
+    /**
+     * Selecciona todos los trabajadores almacenados en la base de datos.
+     * 
+     * @return Una lista de todos los trabajadores almacenados en la base de datos.
+     */
     @Override
     public List<Trabajador> selectAll() {
         ArrayList<Trabajador> trabajadores = new ArrayList<>();
@@ -137,6 +166,13 @@ public class TrabajadorDAO extends DBConnection implements DAO<Trabajador, Integ
         }
         return trabajadores;
     }
+
+    /**
+     * Comprueba si ya existe un trabajador en la base de datos con el DNI especificado.
+     * 
+     * @param dni El DNI del trabajador a comprobar.
+     * @return true si el trabajador ya existe en la base de datos, false en caso contrario.
+     */
     public boolean existsByDni(DNI dni) {
         try {
             connect();

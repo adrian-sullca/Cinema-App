@@ -41,17 +41,17 @@
                         <Label styleClass="txt2" text="Nombre:" />
                         <Label styleClass="txt2" text="Apellido:" GridPane.rowIndex="1" />
                         <Label styleClass="txt2" text="Fecha de Nacimiento:" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" />
-                        <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="fieldNombreTxt" GridPane.columnIndex="1" />
+                        <PasswordField fx:id="fieldContraseña" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="fieldApellidoTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label styleClass="txt2" text="Correo:" GridPane.rowIndex="3" />
                         <Label styleClass="txt2" text="Contraseña:" GridPane.rowIndex="4" />
                         <Label styleClass="txt2" text="Confirmar contraseña:" GridPane.rowIndex="5" />
                         <Label styleClass="txt2" text="Telefono:" GridPane.rowIndex="6" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <DatePicker prefHeight="31.0" prefWidth="463.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="fieldTelefono" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <PasswordField fx:id="fieldConfirmarContraseña" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="fieldCorreoTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <DatePicker fx:id="datePickerFechaNacimiento" prefHeight="31.0" prefWidth="463.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <HBox layoutX="45.0" layoutY="504.0" spacing="160.0" AnchorPane.bottomAnchor="60.0">

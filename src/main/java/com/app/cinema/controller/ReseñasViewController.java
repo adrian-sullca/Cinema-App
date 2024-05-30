@@ -20,6 +20,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Este controlador maneja la vista de las reseñas de una película en la aplicación Cinema.
+ * Permite mostrar las reseñas aprobadas de una película, incluyendo el título, la descripción, el género, la duración y la imagen de portada de la película.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class ReseñasViewController {
     
     @FXML
@@ -46,6 +54,11 @@ public class ReseñasViewController {
     List<Pelicula> listaPeliculas = peliculaDAO.selectAll();
     private ObservableList<Pelicula> peliculas = FXCollections.observableArrayList(listaPeliculas);
 
+    /**
+     * Inicializa la vista de las reseñas de una película con la información de la película proporcionada.
+     * 
+     * @param pelicula La película para la cual se mostrarán las reseñas.
+     */
     public void initialize(Pelicula pelicula) {
         fieldTituloPelicula.setText(pelicula.getTitulo());
         fieldDescripcionPelicula.setText(pelicula.getDescripcion());

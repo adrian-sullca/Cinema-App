@@ -9,7 +9,6 @@ import com.app.cinema.model.SesionUsuario;
 import com.app.cinema.util.AlertUtils;
 
 import java.util.List;
-import java.util.ArrayList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +27,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * Este controlador maneja la vista de una tarjeta de película en la aplicación Cinema.
+ * Permite mostrar los detalles de una película, como su título, descripción, género y duración.
+ * Además, proporciona opciones para añadir la película al carrito, ver reseñas y dejar una reseña.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class PeliculaCardViewController {
 
     @FXML
@@ -68,6 +76,11 @@ public class PeliculaCardViewController {
     Cliente clienteLogeado = SesionUsuario.getClienteLogeado();
     List<Pelicula> listaPeliculasCarrito = clienteLogeado.getCarrito().getPeliculasCarrito();
 
+    /**
+     * Establece los datos de la película en la tarjeta de la vista.
+     * 
+     * @param pelicula La película cuyos datos se mostrarán en la tarjeta.
+     */
     public void setPelicula(Pelicula pelicula) {
         fieldTituloCardTxt.setText(pelicula.getTitulo());
         fieldDescripcionCardTxt.setText(pelicula.getDescripcion());
@@ -102,6 +115,11 @@ public class PeliculaCardViewController {
         peliculaCardPane.setId(String.valueOf(pelicula.getIdPelicula()));
     }
 
+    /**
+     * Maneja el evento de seleccionar una película al hacer clic en su tarjeta.
+     * 
+     * @param event El evento de clic del ratón.
+     */
     @FXML
     public void seleccionarPelicula(MouseEvent event) {
         if (event.getSource() instanceof AnchorPane) {
@@ -119,6 +137,11 @@ public class PeliculaCardViewController {
         }
     }
 
+    /**
+     * Maneja el evento de añadir una película al carrito.
+     * 
+     * @param event El evento de clic del botón.
+     */
     @FXML
     void accionAñadirCarritoBoton(ActionEvent event) {
         try {
@@ -146,6 +169,12 @@ public class PeliculaCardViewController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Maneja el evento de ver las reseñas de una película.
+     * 
+     * @param event El evento de clic del botón.
+     */
     @FXML
     public void accionVerReseñasBoton(ActionEvent event) {
         try {
@@ -183,9 +212,20 @@ public class PeliculaCardViewController {
         }
     }
 
+    /**
+     * Obtiene la película seleccionada.
+     * 
+     * @return La película seleccionada.
+     */
     public Pelicula getPeliculaSeleccionada() {
         return peliculaSeleccionada;
     }
+
+    /**
+     * Maneja el evento de dejar una reseña sobre una película.
+     * 
+     * @param event El evento de clic del botón.
+     */
     @FXML
     void accionDejarReseñaBoton(ActionEvent event) {
         try {

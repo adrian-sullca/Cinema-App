@@ -8,16 +8,29 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Clase principal de la aplicación que inicia la interfaz gráfica.
+ * Extiende la clase Application de JavaFX para manejar la interfaz de usuario.
+ *
+ * @author Adrian
+ */
 public class App extends Application {
     
     private static Stage primaryStage;
 
+    /**
+     * Método principal para iniciar la aplicación.
+     * @param stage El escenario principal de la aplicación.
+     */
     @Override
     public void start(Stage stage) {
         primaryStage = stage;
         abrirInicioSesionView();
     }
 
+    /**
+     * Método estático para abrir la vista de inicio de sesión.
+     */
     public static void abrirInicioSesionView() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -32,6 +45,10 @@ public class App extends Application {
         }
     }
 
+    /**
+     * Método estático para obtener el escenario principal de la aplicación.
+     * @return El escenario principal de la aplicación.
+     */
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -40,6 +57,3 @@ public class App extends Application {
         launch(args);
     }
 }
-// borrar esto
-// lucia.martinez@example.com
-// juan.perez@example.com

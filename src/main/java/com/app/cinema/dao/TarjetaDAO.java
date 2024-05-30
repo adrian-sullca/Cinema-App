@@ -7,6 +7,13 @@ import java.util.List;
 
 import com.app.cinema.model.Cuenta;
 
+/**
+ * Clase para gestionar el acceso a datos de las cuentas (tarjetas) en la base de datos.
+ * Esta clase proporciona métodos para insertar, actualizar, eliminar y seleccionar cuentas
+ * en la base de datos.
+ * 
+ * @author Adrian.
+ */
 public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
 
     private final String INSERT = "INSERT INTO TARJETA(nom,cognom,telefon,nif) VALUES(?,?,?,?)"; //modificar esto
@@ -23,6 +30,11 @@ public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
         throw new UnsupportedOperationException("Unimplemented method 'insert'");
     }
 
+    /**
+     * Actualiza el saldo disponible de una cuenta en la base de datos.
+     * 
+     * @param cuenta La cuenta cuyo saldo se actualizará.
+     */
     @Override
     public void update(Cuenta cuenta) {
         try {
@@ -43,6 +55,12 @@ public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
+    /**
+     * Selecciona una cuenta de la base de datos por su ID.
+     * 
+     * @param id El ID de la cuenta a seleccionar.
+     * @return La cuenta seleccionada, o null si no se encuentra.
+     */
     @Override
     public Cuenta selectById(Integer id) {
         Cuenta tarjeta = null;
@@ -68,6 +86,14 @@ public class TarjetaDAO extends DBConnection implements DAO<Cuenta, Integer> {
         return tarjeta;
     }
 
+    /**
+     * Selecciona una cuenta de la base de datos por su número, fecha de caducidad y CVC.
+     * 
+     * @param numero El número de la cuenta.
+     * @param caducidad La fecha de caducidad de la cuenta.
+     * @param cvc El CVC (Código de Verificación de la Tarjeta) de la cuenta.
+     * @return La cuenta seleccionada, o null si no se encuentra.
+     */
     public Cuenta selectByNumeroFechaCVC(long numero, Date caducidad, int cvc) {
         Cuenta tarjeta = null;
         try {

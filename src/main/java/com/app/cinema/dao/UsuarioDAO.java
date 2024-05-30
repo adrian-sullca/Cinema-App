@@ -9,6 +9,14 @@ import java.util.List;
 import com.app.cinema.model.Usuario;
 import java.sql.Date;
 import com.app.cinema.enums.TipoUsuario;
+
+/**
+ * Clase para gestionar el acceso a datos de los usuarios en la base de datos.
+ * Esta clase proporciona métodos para insertar, actualizar, eliminar y seleccionar usuarios
+ * en la base de datos.
+ *
+ * @author Adrian
+ */
 public class UsuarioDAO extends DBConnection implements DAO<Usuario, Integer> {
 
     private final String INSERT = "INSERT INTO USUARIO(nombre, apellido, correo, contraseña, fecha_nacimiento, tipo_usuario) VALUES(?,?,?,?,?,?)";
@@ -17,6 +25,11 @@ public class UsuarioDAO extends DBConnection implements DAO<Usuario, Integer> {
     private final String SELECTBYID = "SELECT * FROM USUARIO WHERE id_usuario=?";
     private final String SELECTALL = "SELECT * FROM USUARIO";
 
+    /**
+     * Inserta un nuevo usuario en la base de datos.
+     * 
+     * @param t El usuario a insertar.
+     */
     @Override
     public void insert(Usuario t) {
         try {
@@ -41,6 +54,12 @@ public class UsuarioDAO extends DBConnection implements DAO<Usuario, Integer> {
         }
     }
 
+    /**
+     * Inserta un nuevo usuario en la base de datos y devuelve su ID generado.
+     * 
+     * @param t El usuario a insertar.
+     * @return El ID generado para el usuario insertado.
+     */
     public int insertAndReturnId(Usuario t) {
         int idGenerado = 0;
         try {
@@ -76,6 +95,11 @@ public class UsuarioDAO extends DBConnection implements DAO<Usuario, Integer> {
         return idGenerado;
     }
 
+    /**
+     * Actualiza la información de un usuario en la base de datos.
+     * 
+     * @param t El usuario a actualizar.
+     */
     @Override
     public void update(Usuario t) {
         try {
@@ -97,6 +121,11 @@ public class UsuarioDAO extends DBConnection implements DAO<Usuario, Integer> {
         }
     }
 
+    /**
+     * Elimina un usuario de la base de datos.
+     * 
+     * @param t El usuario a eliminar.
+     */
     @Override
     public void delete(Usuario t) {
         try {
@@ -112,6 +141,12 @@ public class UsuarioDAO extends DBConnection implements DAO<Usuario, Integer> {
         }
     }
 
+    /**
+     * Selecciona un usuario de la base de datos por su ID.
+     * 
+     * @param id El ID del usuario a seleccionar.
+     * @return El usuario seleccionado, o null si no se encuentra.
+     */
     @Override
     public Usuario selectById(Integer id) {
         Usuario usuario = null;
@@ -142,6 +177,11 @@ public class UsuarioDAO extends DBConnection implements DAO<Usuario, Integer> {
         return usuario;
     }
 
+    /**
+     * Selecciona todos los usuarios almacenados en la base de datos.
+     * 
+     * @return Una lista de todos los usuarios almacenados en la base de datos.
+     */
     @Override
     public List<Usuario> selectAll() {
         ArrayList<Usuario> Usuarios = new ArrayList<>();

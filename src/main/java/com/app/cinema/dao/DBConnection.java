@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase para gestionar la conexión a la base de datos.
+ * 
+ * @author Adrian.
+ */
 public class DBConnection {
 
     public Connection connection;
@@ -11,9 +16,15 @@ public class DBConnection {
     private final String user = "root";
     private final String password = "informatica1506";
 
+    /**
+     * Constructor de la clase DBConnection.
+     */
     public DBConnection() {
     }
 
+    /**
+     * Establece una conexión con la base de datos.
+     */
     public void connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -26,10 +37,18 @@ public class DBConnection {
         }
     }
 
+    /**
+     * Obtiene la conexión actual.
+     * 
+     * @return La conexión actual.
+     */
     public Connection getConnection() {
         return connection;
     }
 
+    /**
+     * Cierra la conexión a la base de datos.
+     */
     public void closeConnection() {
         if (connection != null) {
             try {

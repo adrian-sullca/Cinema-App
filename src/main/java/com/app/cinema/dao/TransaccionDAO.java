@@ -20,6 +20,13 @@ import com.app.cinema.model.Trabajador;
 import com.app.cinema.model.Transaccion;
 import com.app.cinema.model.Usuario;
 
+/**
+ * Clase para gestionar el acceso a datos de las transacciones en la base de datos.
+ * Esta clase proporciona métodos para insertar, actualizar, eliminar y seleccionar transacciones
+ * en la base de datos.
+ *
+ * @author Adrian
+ */
 public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Integer> {
 
     private final String INSERT = "INSERT INTO TRANSACCION(codi_cliente_t, tipo_transaccion, fecha_transaccion, total_t) VALUES(?,?,?,?)";
@@ -30,6 +37,12 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
     private final String SELECTALL = "SELECT * FROM TRANSACCION";
 
     LineasTransaccionDAO lineasTransaccionDAO = new LineasTransaccionDAO();
+    
+    /**
+     * Inserta una nueva transacción en la base de datos.
+     * 
+     * @param t La transacción a insertar.
+     */
     @Override
     public void insert(Transaccion t) {
         PreparedStatement ps = null;
@@ -73,6 +86,12 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
         }
     }
 
+    /**
+     * Inserta una nueva transacción en la base de datos y devuelve su ID generado.
+     * 
+     * @param t La transacción a insertar.
+     * @return El ID generado para la transacción insertada.
+     */
     public int insertAndReturnId(Transaccion t) {
         int idGenerado = 0;
         try {
@@ -117,6 +136,13 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
+
+    /**
+     * Selecciona una transacción de la base de datos por su ID.
+     * 
+     * @param id El ID de la transacción a seleccionar.
+     * @return La transacción seleccionada, o null si no se encuentra.
+     */
     @Override
     public Transaccion selectById(Integer id) {
         Transaccion transaccion = null;
@@ -144,6 +170,12 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
         return transaccion;
     }
 
+    /**
+     * Selecciona todas las transacciones asociadas a un cliente de la base de datos.
+     * 
+     * @param codiCliente El código del cliente cuyas transacciones se desean seleccionar.
+     * @return Una lista de transacciones asociadas al cliente especificado.
+     */
     public List<Transaccion> selectByCodiCliente(int codiCliente) {
         List<Transaccion> transacciones = new ArrayList<>();
         ClienteDAO clienteDAO = new ClienteDAO();
@@ -172,6 +204,11 @@ public class TransaccionDAO extends DBConnection implements DAO<Transaccion, Int
         return transacciones;
     }
     
+    /**
+     * Selecciona todas las transacciones almacenadas en la base de datos.
+     * 
+     * @return Una lista de todas las transacciones almacenadas en la base de datos.
+     */
     @Override
     public List<Transaccion> selectAll() {
         ArrayList<Transaccion> transacciones = new ArrayList<>();

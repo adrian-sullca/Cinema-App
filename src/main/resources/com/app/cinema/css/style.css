@@ -29,3 +29,8 @@
 .buttonAzul {
     -fx-background-color: #3F73DC;
 }
+
+.button-selected {
+    -fx-background-color: #3F73DC;
+    -fx-text-fill: white;
+}

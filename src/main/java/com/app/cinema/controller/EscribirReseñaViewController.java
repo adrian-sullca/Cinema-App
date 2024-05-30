@@ -1,6 +1,15 @@
 package com.app.cinema.controller;
 
+import com.app.cinema.dao.ReseñasDAO;
+import com.app.cinema.enums.Estado;
+import com.app.cinema.model.Cliente;
 import com.app.cinema.model.Pelicula;
+import com.app.cinema.model.Reseña;
+import com.app.cinema.model.SesionUsuario;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +20,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Esta clase es un controlador para la vista de escritura de reseñas de películas en la aplicación Cinema.
+ * Permite al usuario escribir y enviar reseñas para películas específicas.
+ * 
+ * La vista muestra información sobre la película seleccionada, como título, descripción, género, duración y foto de portada.
+ * El usuario puede escribir una reseña en el campo de texto y enviarla para su revisión.
+ * 
+ * @author Adrian
+ */
 public class EscribirReseñaViewController {
 
     @FXML
@@ -30,8 +48,17 @@ public class EscribirReseñaViewController {
     @FXML
     private TextField fieldGenero;
 
-    public void initialize(Pelicula pelicula) {
+    Cliente clienteLogeado = SesionUsuario.getClienteLogeado();
 
+    private Pelicula pelicula;
+
+    /**
+     * Inicializa la vista de escritura de reseñas con la información de la película seleccionada.
+     * 
+     * @param pelicula La película para la cual se escribirá la reseña.
+     */
+    public void initialize(Pelicula pelicula) {
+        this.pelicula = pelicula;
         fieldTitulo.setText(pelicula.getTitulo());
         fieldDescripcion.setText(pelicula.getDescripcion());
         fieldGenero.setText(pelicula.getGenero().name());
@@ -51,9 +78,26 @@ public class EscribirReseñaViewController {
         }
     }
 
+    /**
+     * Maneja la acción del botón para enviar una reseña.
+     * Crea una nueva reseña con el contenido proporcionado por el usuario y la envía para su revisión.
+     * 
+     * @param event El evento de acción del botón.
+     */
     @FXML
     void accionEnviarBoton(ActionEvent event) {
-        //MODIFICAR : hacer que el boton de enviar envie la reseña a la base de datos en REVISION y que se selecicone el cliente o usuario que mando la reseña
-    }
+        String contenido = fieldReseña.getText();
+        if (contenido.isEmpty()) {
+            System.out.println("La reseña no puede estar vacía.");
+            return;
+        }
 
+        LocalDate localDate = LocalDate.now();
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Reseña reseñaNueva = new Reseña(0, contenido, date, Estado.REVISION, clienteLogeado, pelicula);
+        ReseñasDAO reseñasDAO = new ReseñasDAO();
+        reseñasDAO.insert(reseñaNueva);
+        System.out.println("Reseña enviada para revisión.");
+    }
+    
 }

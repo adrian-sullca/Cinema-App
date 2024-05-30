@@ -19,6 +19,13 @@ import com.app.cinema.model.Reseña;
 import com.app.cinema.model.Trabajador;
 import com.app.cinema.model.Usuario;
 
+/**
+ * Clase para gestionar el acceso a datos de las películas en la base de datos.
+ * Esta clase proporciona métodos para insertar, actualizar, eliminar y seleccionar películas
+ * en la base de datos.
+ * 
+ * @author Adrian
+ */
 public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> {
     private final String INSERT = "INSERT INTO PELICULA(portada, titulo, genero, duracion, descripcion, precio) VALUES(?,?,?,?,?,?)";
     private final String UPDATE = "UPDATE PELICULA SET portada=?, titulo=?, genero=?, duracion=?, descripcion=?, precio=? WHERE id_pelicula=?";
@@ -28,6 +35,11 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
     private final String SELECTBYTITULO = "SELECT * FROM PELICULA WHERE titulo LIKE ?";
     private final String SELECTALL = "SELECT * FROM PELICULA";
     
+    /**
+     * Inserta una nueva película en la base de datos.
+     * 
+     * @param t La película a insertar.
+     */
     @Override
     public void insert(Pelicula t) {
         PreparedStatement ps = null;
@@ -69,6 +81,12 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
             }
         }
     }
+
+    /**
+     * Actualiza una película en la base de datos.
+     * 
+     * @param t La película a actualizar.
+     */
     @Override
     public void update(Pelicula t) {
         try {
@@ -90,6 +108,11 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
         }
     }
 
+    /**
+     * Elimina una película de la base de datos.
+     * 
+     * @param t La película a eliminar.
+     */
     @Override
     public void delete(Pelicula t) {
         try {
@@ -104,6 +127,13 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
             e.printStackTrace();
         }
     }
+
+    /**
+     * Selecciona una película de la base de datos por su ID.
+     * 
+     * @param id El ID de la película a seleccionar.
+     * @return La película seleccionada.
+     */
     @Override
     public Pelicula selectById(Integer id) {
         Pelicula pelicula = null;
@@ -134,6 +164,12 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
         return pelicula;
     }
 
+    /**
+     * Selecciona películas de la base de datos por su género.
+     * 
+     * @param genero El género de las películas a seleccionar.
+     * @return Una lista de películas del género especificado.
+     */
     public List<Pelicula> selectPeliculasByGenero(Genero genero) {
         List<Pelicula> peliculasGenero = new ArrayList<>();
     try {
@@ -161,6 +197,12 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
     return peliculasGenero;
     }
 
+    /**
+     * Busca películas en la base de datos por su título.
+     * 
+     * @param titulo El título o parte del título de las películas a buscar.
+     * @return Una lista de películas que coinciden con el título especificado.
+     */
     public List<Pelicula> buscarPeliculasPorTitulo(String titulo) {
         List<Pelicula> peliculas = new ArrayList<>();
         try {
@@ -193,6 +235,11 @@ public class PeliculaDAO extends DBConnection implements DAO<Pelicula, Integer> 
         return peliculas;
     }
 
+    /**
+     * Selecciona todas las películas de la base de datos.
+     * 
+     * @return Una lista de todas las películas almacenadas en la base de datos.
+     */
     @Override
     public List<Pelicula> selectAll() {
         ArrayList<Pelicula> peliculas = new ArrayList<>();

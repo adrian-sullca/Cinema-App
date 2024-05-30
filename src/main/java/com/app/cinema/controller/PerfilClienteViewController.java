@@ -33,6 +33,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * Este controlador maneja la vista del perfil de un cliente en la aplicación Cinema.
+ * Permite al cliente ver y editar su información personal, vincular una tarjeta,
+ * recargar saldo, cambiar su foto de perfil, entre otras funcionalidades.
+ * 
+ * Se utiliza una interfaz gráfica de usuario (GUI) basada en JavaFX para interactuar con el usuario.
+ * 
+ * @author Adrian
+ */
 public class PerfilClienteViewController {
 
     @FXML
@@ -81,30 +90,60 @@ public class PerfilClienteViewController {
     private ObservableList<Cliente> clientes = FXCollections.observableArrayList(listaCliente);
 
     Cliente clienteLogeado = SesionUsuario.getClienteLogeado();
+    
+    /**
+     * Inicializa la vista del perfil del cliente.
+     */
     @FXML
     public void initialize() {
+        System.out.println("Cliente logeado desde perfil view");
+        System.out.println(clienteLogeado);
         actualizarCamposCliente(clienteLogeado);
     }
 
+    /**
+     * Actualiza los campos de la vista con los datos del cliente.
+     * 
+     * @param cliente El cliente cuyos datos se van a mostrar.
+     */
     private void actualizarCamposCliente(Cliente cliente) {
         fieldNombreTxt.setText(cliente.getNombre());
         fieldApellidoTxt.setText(cliente.getApellido());
         fieldCorreoTxt.setText(cliente.getCorreo());
-        fieldTarjetaVinculadaTxt.setText(cliente.getTarjeta().getNumeroCuenta() + "");
-        fieldTelefonoTxt.setText(cliente.getTelefono() + "");
-        fieldSaldoTxt.setText(cliente.getTarjeta().getSaldoDiponible() + "");
-        fieldComentarioPrefTxt.setText(cliente.getComentarioPref());
-        java.util.Date fechaNacimientoUtil = clienteLogeado.getFechaNacimiento();
-        java.sql.Date fechaNacimientoSql = new java.sql.Date(fechaNacimientoUtil.getTime());
-        LocalDate localDateFN = fechaNacimientoSql.toLocalDate();
-        this.datePickerFechaNacimiento.setValue(localDateFN);
-        String rutaImagen = "/com/app/cinema/img/" + cliente.getFotoPerfil();
-        URL imageUrl = getClass().getResource(rutaImagen);
-        if (imageUrl != null) {
-            Image image = new Image(imageUrl.toString());
-            ajustarImagen(image);
+        
+        if (cliente.getTarjeta() != null) {
+            fieldTarjetaVinculadaTxt.setText(cliente.getTarjeta().getNumeroCuenta() + "");
+            fieldSaldoTxt.setText(cliente.getTarjeta().getSaldoDiponible() + "");
         } else {
-            System.out.println("No se pudo encontrar la imagen en la ruta: " + rutaImagen);
+            fieldTarjetaVinculadaTxt.setText("No vinculada");
+            fieldSaldoTxt.setText("0");
+        }
+        
+        fieldTelefonoTxt.setText(cliente.getTelefono() + "");
+        fieldComentarioPrefTxt.setText(cliente.getComentarioPref());
+        
+        java.util.Date fechaNacimientoUtil = cliente.getFechaNacimiento();
+        if (fechaNacimientoUtil != null) {
+            java.sql.Date fechaNacimientoSql = new java.sql.Date(fechaNacimientoUtil.getTime());
+            LocalDate localDateFN = fechaNacimientoSql.toLocalDate();
+            this.datePickerFechaNacimiento.setValue(localDateFN);
+        } else {
+            this.datePickerFechaNacimiento.setValue(null);
+        }
+        
+        String rutaImagen = "/com/app/cinema/img/" + cliente.getFotoPerfil();
+        if (cliente.getFotoPerfil() != null && !cliente.getFotoPerfil().isEmpty()) {
+            URL imageUrl = getClass().getResource(rutaImagen);
+            if (imageUrl != null) {
+                Image image = new Image(imageUrl.toString());
+                ajustarImagen(image);
+            } else {
+                System.out.println("No se pudo encontrar la imagen en la ruta: " + rutaImagen);
+            }
+        } else {
+            // Imagen por defecto si no hay foto de perfil
+            Image image = new Image(getClass().getResource("/com/app/cinema/img/perfilDefault.jpg").toString());
+            ajustarImagen(image);
         }
     }
 
@@ -117,6 +156,12 @@ public class PerfilClienteViewController {
         imageViewFotoCliente.setCache(true);
     }
     
+    /**
+     * Maneja el evento de vincular una tarjeta al cliente.
+     * 
+     * @param event El evento que desencadena esta acción.
+     * @throws IOException Si ocurre un error de entrada/salida.
+     */
     @FXML
     void accionVincularTarjetaBoton(ActionEvent event) throws IOException {
         String rutaFXML = "/com/app/cinema/view/vincularTarjetaView.fxml";
@@ -133,6 +178,11 @@ public class PerfilClienteViewController {
         vincularTarjetaStage.showAndWait();
     }
 
+    /**
+     * Maneja el evento de editar los datos del cliente.
+     * 
+     * @param event El evento que desencadena esta acción.
+     */
     @FXML
     void accionEditarDatosBoton(ActionEvent event) {
         String nombreNuevo = this.fieldNombreTxt.getText();
@@ -140,9 +190,13 @@ public class PerfilClienteViewController {
         String correo = this.fieldCorreoTxt.getText();
         String telefono = this.fieldTelefonoTxt.getText();
         LocalDate fechaNacimientoNueva = this.datePickerFechaNacimiento.getValue();
-        java.sql.Date fechaNacimientoSql = java.sql.Date.valueOf(fechaNacimientoNueva);
+        java.sql.Date fechaNacimientoSql = null;
+        
+        if (fechaNacimientoNueva != null) {
+            fechaNacimientoSql = java.sql.Date.valueOf(fechaNacimientoNueva);
+        }
 
-        boolean correoDuplicado = clientes.stream().anyMatch(c -> !c.equals(cliente) && c.getCorreo().equals(correo));
+        boolean correoDuplicado = clientes.stream().anyMatch(c -> !c.equals(clienteLogeado) && c.getCorreo().equals(correo));
         if (correoDuplicado) {
             AlertUtils.mostrarVentanaError(AlertType.ERROR, "Error", "Error: Correo duplicado");
         } else {
@@ -154,9 +208,14 @@ public class PerfilClienteViewController {
             AlertUtils.mostrarVentanaExito(AlertType.INFORMATION, "Operacion Exitosa", "Perfil actualizado correctamente");
             clienteDAO.update(clienteLogeado);
             actualizarCamposCliente(clienteLogeado);
-
         }
     }
+
+    /**
+     * Maneja el evento de cambiar la foto de perfil del cliente.
+     * 
+     * @param event El evento que desencadena esta acción.
+     */
     @FXML
     void accionCambiarFotoBoton(ActionEvent event) {
         FileChooser openFile = new FileChooser();
