@@ -63,11 +63,15 @@
                   </Button>
                </children>
             </VBox>
-            <TextField fx:id="fieldSaldoTxt" layoutX="45.0" layoutY="441.0" prefHeight="135.0" prefWidth="194.0" AnchorPane.bottomAnchor="29.0" />
-            <TextField fx:id="fieldComentarioPrefTxt" layoutX="320.0" layoutY="441.0" prefHeight="135.0" prefWidth="494.0" />
+            <TextField fx:id="fieldSaldoTxt" layoutX="45.0" layoutY="441.0" prefHeight="103.0" prefWidth="194.0" AnchorPane.bottomAnchor="29.0" />
+            <TextField fx:id="fieldComentarioPrefTxt" layoutX="320.0" layoutY="473.0" prefHeight="103.0" prefWidth="494.0" />
             <ImageView fx:id="imageViewFotoCliente" fitHeight="261.0" fitWidth="194.0" layoutX="45.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="45.0" layoutY="441.0" prefHeight="21.0" prefWidth="145.0" styleClass="txt2" text="SALDO DE CUENTA:" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label layoutX="20.0" layoutY="19.0" text="PERFIL DEL CLIENTE" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

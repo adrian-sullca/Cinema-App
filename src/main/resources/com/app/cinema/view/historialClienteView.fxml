@@ -7,7 +7,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="859.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.HistorialClienteViewController">
    <children>
-      <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label layoutX="14.0" layoutY="19.0" text="HISTORIAL DE CLIENTE" />
+         </children></AnchorPane>
       <TableView fx:id="tableViewTransacciones" layoutX="35.0" layoutY="103.0" onMouseClicked="#seleccionarTransaccionTabla" prefHeight="221.0" prefWidth="789.0">
         <columns>
           <TableColumn fx:id="tableColumnIdTransaccion" prefWidth="78.0" text="Id" />
@@ -16,7 +19,11 @@
             <TableColumn fx:id="tableColumnTotal" prefWidth="115.0" text="Total" />
         </columns>
       </TableView>
-      <Button fx:id="botonDevolver" layoutX="679.0" layoutY="638.0" mnemonicParsing="false" onAction="#accionDevolverBoton" prefHeight="40.0" prefWidth="145.0" text="Devolver" />
+      <Button fx:id="botonDevolver" layoutX="679.0" layoutY="638.0" mnemonicParsing="false" onAction="#accionDevolverBoton" prefHeight="40.0" prefWidth="145.0" stylesheets="@../css/style.css" text="Devolver">
+         <styleClass>
+            <String fx:value="txt2" />
+            <String fx:value="buttonAzul" />
+         </styleClass></Button>
       <TableView fx:id="tableViewLineasTransacciones" layoutX="35.0" layoutY="353.0" prefHeight="269.0" prefWidth="789.0">
          <columns>
             <TableColumn fx:id="tableColumnIdLineaTransaccion" prefWidth="53.0" text="Id LT" />

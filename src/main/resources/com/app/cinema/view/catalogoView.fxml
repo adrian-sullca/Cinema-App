@@ -56,6 +56,9 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane prefHeight="58.0" prefWidth="819.0" styleClass="background3" AnchorPane.bottomAnchor="627.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label layoutX="21.0" layoutY="19.0" text="CATALOGO DE PELICULAS" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

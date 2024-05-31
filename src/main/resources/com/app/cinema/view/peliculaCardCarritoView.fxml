@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="peliculaCardCarritoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.PeliculaCardCarritoViewController">
+<AnchorPane fx:id="peliculaCardCarritoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="720.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.PeliculaCardCarritoViewController">
    <children>
       <AnchorPane fx:id="anchorPaneImageView" layoutX="12.0" layoutY="11.0" prefHeight="148.0" prefWidth="130.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="15.0">
          <children>
@@ -15,8 +15,16 @@
       </AnchorPane>
       <VBox layoutX="595.0" layoutY="15.0" prefHeight="110.0" prefWidth="116.0" spacing="27.0" AnchorPane.bottomAnchor="77.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
          <children>
-            <Button fx:id="comprarPeliculaBoton" layoutX="536.0" layoutY="36.0" mnemonicParsing="false" onAction="#accionComprarPeliculaBoton" prefHeight="40.0" prefWidth="121.0" text="Comprar" />
-            <Button fx:id="quitarPeliculaBoton" layoutX="536.0" layoutY="88.0" mnemonicParsing="false" onAction="#accionQuitarPeliculaBoton" prefHeight="40.0" prefWidth="121.0" text="Quitar" />
+            <Button fx:id="comprarPeliculaBoton" layoutX="536.0" layoutY="36.0" mnemonicParsing="false" onAction="#accionComprarPeliculaBoton" prefHeight="40.0" prefWidth="121.0" text="Comprar">
+               <styleClass>
+                  <String fx:value="txt2" />
+                  <String fx:value="buttonAzul" />
+               </styleClass></Button>
+            <Button fx:id="quitarPeliculaBoton" layoutX="536.0" layoutY="88.0" mnemonicParsing="false" onAction="#accionQuitarPeliculaBoton" prefHeight="40.0" prefWidth="121.0" text="Quitar">
+               <styleClass>
+                  <String fx:value="txt2" />
+                  <String fx:value="buttonAzul" />
+               </styleClass></Button>
          </children>
       </VBox>
       <GridPane layoutX="165.0" layoutY="122.0" prefHeight="80.0" prefWidth="414.0">

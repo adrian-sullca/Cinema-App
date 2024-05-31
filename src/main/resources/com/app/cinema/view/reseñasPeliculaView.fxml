@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.ReseñasViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="600.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.ReseñasViewController">
    <children>
       <ImageView fx:id="imageViewPelicula" fitHeight="168.0" fitWidth="138.0" layoutX="19.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
       <GridPane layoutX="172.0" layoutY="18.0" prefHeight="168.0" prefWidth="404.0" AnchorPane.bottomAnchor="408.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="18.0">
@@ -21,10 +21,10 @@
             <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Titulo" />
-            <Label text="Genero" GridPane.rowIndex="1" />
-            <Label text="Duracion" GridPane.rowIndex="2" />
-            <Label text="Descripcion" translateY="-10.0" GridPane.rowIndex="3" />
+            <Label styleClass="txt2" text="Titulo" />
+            <Label styleClass="txt2" text="Genero" GridPane.rowIndex="1" />
+            <Label styleClass="txt2" text="Duracion" GridPane.rowIndex="2" />
+            <Label styleClass="txt2" text="Descripcion" translateY="-10.0" GridPane.rowIndex="3" />
             <TextField fx:id="fieldTituloPelicula" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="fieldGeneroPelicula" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="fieldDuracionPelicula" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />

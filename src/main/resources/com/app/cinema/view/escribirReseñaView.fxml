@@ -6,8 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane fx:id="anchorPaneEscribirReseña" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.EscribirReseñaViewController">
+<AnchorPane fx:id="anchorPaneEscribirReseña" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="600.0" styleClass="background2" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.EscribirReseñaViewController">
    <children>
       <ImageView fx:id="imageViewFotoPelicula" fitHeight="168.0" fitWidth="138.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="448.0" />
       <GridPane layoutX="159.0" layoutY="38.0" prefHeight="168.0" prefWidth="404.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="18.0">
@@ -22,10 +21,10 @@
             <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Titulo" />
-            <Label text="Genero" GridPane.rowIndex="1" />
-            <Label text="Duracion" GridPane.rowIndex="2" />
-            <Label text="Descripcion" GridPane.rowIndex="3" />
+            <Label styleClass="txt2" text="Titulo" />
+            <Label styleClass="txt2" text="Genero" GridPane.rowIndex="1" />
+            <Label styleClass="txt2" text="Duracion" GridPane.rowIndex="2" />
+            <Label styleClass="txt2" text="Descripcion" GridPane.rowIndex="3" />
             <TextField fx:id="fieldTitulo" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="fieldGenero" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="fieldDuracion" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -45,10 +44,14 @@
           <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Escribe tu reseña:" />
+            <Label styleClass="txt2" text="Escribe tu reseña:" />
             <TextArea fx:id="fieldReseña" prefHeight="82.0" prefWidth="544.0" wrapText="true" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="botonEnviar" layoutX="431.0" layoutY="350.0" mnemonicParsing="false" onAction="#accionEnviarBoton" prefHeight="40.0" prefWidth="145.0" text="Enviar" />
+      <Button fx:id="botonEnviar" layoutX="431.0" layoutY="350.0" mnemonicParsing="false" onAction="#accionEnviarBoton" prefHeight="40.0" prefWidth="145.0" text="Enviar">
+         <styleClass>
+            <String fx:value="txt2" />
+            <String fx:value="buttonAzul" />
+         </styleClass></Button>
    </children>
 </AnchorPane>

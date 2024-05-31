@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="peliculaCardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#seleccionarPelicula" prefHeight="198.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.PeliculaCardViewController">
+<AnchorPane fx:id="peliculaCardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#seleccionarPelicula" prefHeight="198.0" prefWidth="720.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.PeliculaCardViewController">
    <children>
       <AnchorPane fx:id="anchorPaneImageView" layoutX="12.0" layoutY="11.0" prefHeight="148.0" prefWidth="130.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="15.0">
          <children>
@@ -15,9 +15,21 @@
       </AnchorPane>
       <VBox layoutX="595.0" layoutY="15.0" prefHeight="176.0" prefWidth="116.0" spacing="27.0" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
          <children>
-            <Button fx:id="añadirCarritoBoton" layoutX="536.0" layoutY="36.0" mnemonicParsing="false" onAction="#accionAñadirCarritoBoton" prefHeight="40.0" prefWidth="121.0" text="Añadir Carrito" />
-            <Button fx:id="verReseñasBoton" layoutX="536.0" layoutY="88.0" mnemonicParsing="false" onAction="#accionVerReseñasBoton" prefHeight="40.0" prefWidth="121.0" text="Ver Reseñas" />
-            <Button fx:id="dejarReseñaBoton" layoutX="536.0" layoutY="141.0" mnemonicParsing="false" onAction="#accionDejarReseñaBoton" prefHeight="40.0" prefWidth="121.0" text="Dejar Reseña" />
+            <Button fx:id="añadirCarritoBoton" layoutX="536.0" layoutY="36.0" mnemonicParsing="false" onAction="#accionAñadirCarritoBoton" prefHeight="40.0" prefWidth="121.0" stylesheets="@../css/style.css" text="Añadir Carrito">
+               <styleClass>
+                  <String fx:value="buttonAzul" />
+                  <String fx:value="txt2" />
+               </styleClass></Button>
+            <Button fx:id="verReseñasBoton" layoutX="536.0" layoutY="88.0" mnemonicParsing="false" onAction="#accionVerReseñasBoton" prefHeight="40.0" prefWidth="121.0" text="Ver Reseñas">
+               <styleClass>
+                  <String fx:value="txt2" />
+                  <String fx:value="buttonAzul" />
+               </styleClass></Button>
+            <Button fx:id="dejarReseñaBoton" layoutX="536.0" layoutY="141.0" mnemonicParsing="false" onAction="#accionDejarReseñaBoton" prefHeight="40.0" prefWidth="121.0" text="Dejar Reseña">
+               <styleClass>
+                  <String fx:value="txt2" />
+                  <String fx:value="buttonAzul" />
+               </styleClass></Button>
          </children>
       </VBox>
       <GridPane layoutX="165.0" layoutY="11.0" prefHeight="189.0" prefWidth="414.0">

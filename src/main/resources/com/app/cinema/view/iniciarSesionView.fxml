@@ -39,14 +39,14 @@
                         <TextField fx:id="correoUsuarioField" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <HBox layoutX="45.0" layoutY="380.0" spacing="160.0" AnchorPane.bottomAnchor="189.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="380.0">
+                  <HBox layoutX="43.0" layoutY="380.0" prefHeight="44.0" prefWidth="362.0" spacing="140.0" AnchorPane.bottomAnchor="176.0" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="380.0">
                      <children>
-                        <Button fx:id="iniciarSesionBoton" defaultButton="true" layoutX="161.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionIniciarSesionBoton" text="Iniciar Sesion">
+                        <Button fx:id="iniciarSesionBoton" defaultButton="true" layoutX="161.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionIniciarSesionBoton" prefHeight="48.0" prefWidth="120.0" text="Iniciar Sesion">
                            <styleClass>
                               <String fx:value="txt2" />
                               <String fx:value="buttonAzul" />
                            </styleClass></Button>
-                        <Button fx:id="registrarseBoton" layoutX="243.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionRegistrarseBoton" text="Registrarse">
+                        <Button fx:id="registrarseBoton" layoutX="243.0" layoutY="517.0" mnemonicParsing="false" onAction="#accionRegistrarseBoton" prefHeight="43.0" prefWidth="112.0" text="Registrarse">
                            <styleClass>
                               <String fx:value="txt2" />
                               <String fx:value="buttonAzul" />

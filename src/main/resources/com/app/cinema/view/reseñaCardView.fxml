@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="531.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.ReseñaCardViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="531.0" styleClass="background2" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.cinema.controller.ReseñaCardViewController">
    <children>
       <GridPane layoutX="20.0" layoutY="11.0" prefHeight="164.0" prefWidth="495.0">
         <columnConstraints>
@@ -18,9 +18,9 @@
           <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nombre Cliente:" />
-            <Label text="Fecha Publicación:" GridPane.rowIndex="1" />
-            <Label text="Contenido Reseña:" translateY="-20.0" GridPane.rowIndex="2" />
+            <Label styleClass="txt2" text="Nombre Cliente:" />
+            <Label styleClass="txt2" text="Fecha Publicación:" GridPane.rowIndex="1" />
+            <Label styleClass="txt2" text="Contenido Reseña:" translateY="-20.0" GridPane.rowIndex="2" />
             <TextField fx:id="fieldNombreCliente" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="fieldFechaPublicacion" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextArea fx:id="fieldContenidoReseña" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
